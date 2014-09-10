@@ -1,0 +1,16 @@
+{
+  "name": "macro-tracker",
+  "version": "0.0.0",
+  "authors": [
+    "Giancarlo Bautista <gbautis@gmail.com>"
+  ],
+  "description": "Macronutrient tracker built with AngularJS",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "latest",
+    "angular-route": "latest",
+    "angular-ui-router": "latest",
+    "bootstrap": "latest"
+  }
+}

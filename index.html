@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="macronutrient tracker">
+   <meta name="author" content="giancarlo bautista">
+   <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+   <title>Macro Tracker</title>
+</head>
+<body data-ng-app="macroTracker">
+
+   <!-- NAVIGATION -->
+   <nav class="navbar navbar-inverse" role="navigation">
+       <div class="navbar-header">
+           <a class="navbar-brand" ui-sref="#">Macro Tracker</a>
+       </div>
+       <ul class="nav navbar-nav">
+           <li><a ui-sref="home">Home</a></li>
+           <li><a ui-sref="about">About</a></li>
+           <li><a ui-sref="foods">Foods</a></li>
+       </ul>
+   </nav>
+
+   <!-- MAIN -->
+   <div class="container">
+
+      <!-- INJECTED CONTENT -->
+      <div ui-view></div>
+
+   </div>
+
+   <br>
+   <br>
+   <hr />
+   <footer class="text-center">
+      <p><a href="mailto:bautista.giancarlo@gmail.com">Giancarlo Bautista</a></p>
+   </footer>
+
+   <script src="bower_components/jquery/dist/jquery.min.js"></script>
+   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+   <script src="bower_components/angular/angular.min.js"></script>
+   <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+   <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+
+   <script src="public/app.js"></script>
+
+   <!-- controllers -->
+   <script src="public/controllers/FoodsController.js"></script>
+
+   <!-- directives -->
+   <script src="public/directives/foodItem.js"></script>
+
+   <!-- services -->
+   <script src="public/services/foodRetrievalService.js"></script>
+</body>
+</html>
