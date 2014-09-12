@@ -30,14 +30,13 @@
    <br>
    <table border="1" width="100%">
       <tr>
-         <td class="text-center">Name</td>
-         <td class="text-center">Cals</td>
-         <td class="text-center">Protein</td>
-         <td class="text-center">Carbs</td>
-         <td class="text-center">Fat</td>
+         <td class="text-center col-md-8">Name</td>
+         <td class="text-center col-md-1">Cals</td>
+         <td class="text-center col-md-1">Protein</td>
+         <td class="text-center col-md-1">Carbs</td>
+         <td class="text-center col-md-1">Fat</td>
       </tr>
-      <tr ng-repeat="food in foods">
-         <!--<food />-->
+<!--       <tr ng-repeat="food in foods">
          <td class="text-center col-md-8">
             {{food.name}}
          </td>
@@ -53,14 +52,35 @@
          <td class="text-center col-md-1">
             {{food.fat}}
          </td>
-      </tr>
-      <tr>
-         <td></td>
-         <td class="text-center">{{totalCals}}</td>
-         <td class="text-center">{{totalProtein}}</td>
-         <td class="text-center">{{totalCarbs}}</td>    
-         <td class="text-center">{{totalFat}}</td>         
-      </tr>
+      </tr> -->
+      <table border="1" width="100%" ng-repeat="meal in meals">
+         <tr ng-repeat="food in meal">
+             <td class="text-center col-md-8">
+               {{food.name}}
+            </td>
+            <td class="text-center col-md-1">
+               {{food.cals}}
+            </td>
+            <td class="text-center col-md-1">
+               {{food.protein}}
+            </td>
+            <td class="text-center col-md-1">
+               {{food.carbs}}
+            </td>
+            <td class="text-center col-md-1">
+               {{food.fat}}
+            </td>
+         </tr>
+      </table>
+      <table border="1" width="100%">
+         <tr>
+            <td class="col-md-8"></td>
+            <td class="text-center col-md-1">{{totalCals}}</td>
+            <td class="text-center col-md-1">{{totalProtein}}</td>
+            <td class="text-center col-md-1">{{totalCarbs}}</td>    
+            <td class="text-center col-md-1">{{totalFat}}</td>         
+         </tr>
+      </table>
    </table>
    <br>
    <br>
@@ -69,7 +89,7 @@
    <table width="75%">
       <tr ng-repeat="food in foods">
          <td style="padding-bottom: 10px;">
-            <button class="col-md-2">
+            <button class="col-md-2" ng-click="buttonAddFood()">
                {{food.name}}
                <br>
                {{food.cals}} / {{food.protein}} / {{food.carbs}} / {{food.fat}} 

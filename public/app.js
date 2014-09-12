@@ -18,8 +18,4 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			url: '/foods',
 			templateUrl: 'public/views/partial-foods.html'
 		})
-		.state('blank', {
-			url: '/',
-			templateUrl: 'public/views/partial-blank.html'
-		})
 });

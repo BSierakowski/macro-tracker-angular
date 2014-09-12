@@ -1,7 +1,9 @@
 'use strict';
 
-app.controller('FoodsController', function($scope, foodRetrievalService) {
-	$scope.foods = foodRetrievalService.getFoods();
+app.controller('FoodsController', function($scope, foodService) {
+	$scope.meals = foodService.getMeals();
+	console.log($scope.meals);
+	$scope.foods = foodService.getFoods();
 
 	$scope.addFood = function() {
 		$scope.foods.push({
@@ -13,16 +15,29 @@ app.controller('FoodsController', function($scope, foodRetrievalService) {
 		});
 	};
 
-	$scope.$watchCollection('foods', function(newValue, oldValue) {
+	$scope.buttonAddFood = function() {
+		var food = this.food;
+		$scope.foods.push({
+			name: food.name,
+			cals: food.cals,
+			protein: food.protein,
+			carbs: food.carbs,
+			fat: food.fat
+		});
+	};
+
+	$scope.$watchCollection('meals', function(newValue, oldValue) {
 		$scope.totalCals = 0;
 		$scope.totalProtein = 0;
 		$scope.totalCarbs = 0;
 		$scope.totalFat = 0;
-		$scope.foods.forEach(function(food) {
-			$scope.totalCals += parseInt(food.cals);
-			$scope.totalProtein += parseInt(food.protein);
-			$scope.totalCarbs += parseInt(food.carbs);
-			$scope.totalFat += parseInt(food.fat);
+		$scope.meals.forEach(function(meal) {
+			meal.forEach(function(food) {
+				$scope.totalCals += parseInt(food.cals);
+				$scope.totalProtein += parseInt(food.protein);
+				$scope.totalCarbs += parseInt(food.carbs);
+				$scope.totalFat += parseInt(food.fat);
+			});
 		});
 	});
 });
