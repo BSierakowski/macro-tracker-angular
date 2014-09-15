@@ -7,7 +7,19 @@ app.factory('foodService', function($resource) {
 			return [
 			    {name: 'test food 1', cals: 645, protein: 50, carbs: 100, fat: 5},
 			    {name: 'test food 2', cals: 169, protein: 20, carbs: 20, fat: 1},
-			    {name: 'test food 3', cals: 290, protein: 10, carbs: 40, fat: 10}
+			    {name: 'test food 3', cals: 290, protein: 10, carbs: 40, fat: 10},
+			    {name: 'test food 4', cals: 645, protein: 50, carbs: 100, fat: 5},
+			    {name: 'test food 5', cals: 169, protein: 20, carbs: 20, fat: 1},
+			    {name: 'test food 6', cals: 290, protein: 10, carbs: 40, fat: 10},
+			    {name: 'test food 7', cals: 645, protein: 50, carbs: 100, fat: 5},
+			    {name: 'test food 8', cals: 169, protein: 20, carbs: 20, fat: 1},
+			    {name: 'test food 9', cals: 290, protein: 10, carbs: 40, fat: 10},
+			    {name: 'test food 10', cals: 645, protein: 50, carbs: 100, fat: 5},
+			    {name: 'best food 11', cals: 169, protein: 20, carbs: 20, fat: 1},
+			    {name: 'test food 12', cals: 290, protein: 10, carbs: 40, fat: 10},
+			    {name: 'test food 13', cals: 645, protein: 50, carbs: 100, fat: 5},
+			    {name: 'test food 14', cals: 169, protein: 20, carbs: 20, fat: 1},
+			    {name: 'test food 15', cals: 290, protein: 10, carbs: 40, fat: 10}
 			];
 		},
 		getMeals : function() {

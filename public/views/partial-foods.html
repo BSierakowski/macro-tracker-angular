@@ -28,20 +28,21 @@
       </tr>
    </table>
    <br>
-   <br>
    <div class="container">
       <div class="row">
-         <div style="border: 1px solid; border-color: #bbd8e9;" class="col-md-2">
-            <table width="75%">
-               <tr ng-repeat="food in foods">
-                  <td style="padding-bottom: 5px; padding-top: 5px;">
-                     <button class="btn btn-default" ng-click="buttonAddFoodToMeal()">
-                        {{food.name}}
-                        <br>
-                        {{food.cals}} / {{food.protein}} / {{food.carbs}} / {{food.fat}} 
-                     </button>
-                  </td>
-               </tr>
+         <div style="border: 1px solid; border-color: #bbd8e9; border-radius: 4px; height: 500px;" class="col-md-2 pre-scrollable">
+            <table class="center-block col-md-12">
+               <div class="row">
+                  <tr ng-repeat="food in foods">
+                     <td style="padding-bottom: 5px; padding-top: 5px;">
+                        <button class="btn btn-default col-md-12" ng-click="buttonAddFoodToMeal()">
+                           {{food.name}}
+                           <br>
+                           {{food.cals}} / {{food.protein}} / {{food.carbs}} / {{food.fat}} 
+                        </button>
+                     </td>
+                  </tr>
+               </div>
             </table>
          </div>
          <div class="col-md-10">
@@ -85,9 +86,6 @@
          </div>
       </div>
    </div>
-   <br>
-   <br>
-   <br>
    <br>
    <br>
    <simple-directive></simple-directive>
