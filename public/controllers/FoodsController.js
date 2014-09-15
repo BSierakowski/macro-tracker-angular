@@ -26,6 +26,17 @@ app.controller('FoodsController', function($scope, foodService) {
 		});
 	};
 
+	$scope.buttonAddFoodToMeal = function() {
+		var food = this.food;
+		// $scope.foods.push({
+		// 	name: food.name,
+		// 	cals: food.cals,
+		// 	protein: food.protein,
+		// 	carbs: food.carbs,
+		// 	fat: food.fat
+		// });
+	};
+
 	$scope.$watchCollection('meals', function(newValue, oldValue) {
 		$scope.totalCals = 0;
 		$scope.totalProtein = 0;
