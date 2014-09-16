@@ -8,3 +8,8 @@
 }
 */
 
+.scrollable {
+	max-height: 455px;
+	overflow: hidden;
+	overflow-y: scroll;
+}

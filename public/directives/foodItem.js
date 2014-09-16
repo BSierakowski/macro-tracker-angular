@@ -7,7 +7,10 @@ app.directive('foodItem', function ($rootScope, $compile) {
 // </td><td class='text-center'>{{food.carbs}}</td><td class='text-center'>{{food.fat}}</td>";
 // 			angular.element(element).html($compile(markup)(scope));
 // 		},
-		restrict: 'EA'
+		link: function(scope, elem, attrs) {
+			
+		}
+		,restrict: 'EA'
 		,scope: {
 			food: '=foodItem'
 		}

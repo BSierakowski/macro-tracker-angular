@@ -1,36 +1,10 @@
-<div class="container" ng-controller="FoodsController">    
-   <table>
-      <tr>
-         <td>
-            <button class="btn btn-default" ng-click="addFood()">Add food</button>
-         </td>
-      </tr>
-      <tr><td height="10px"></td></tr>
-      <tr>
-         <td>Name: </td>
-         <td><input ng-model="newFood.name"></input></td>
-      </tr>
-      <tr>
-         <td>Cals: </td>
-         <td><input ng-model="newFood.cals"></input></td>
-      </tr>
-      <tr>
-         <td>Protein: </td>
-         <td><input ng-model="newFood.protein"></input></td>
-      </tr>
-      <tr>
-         <td>Carbs: </td>
-         <td><input ng-model="newFood.carbs"></input></td>
-      </tr>
-      <tr>
-         <td>Fat: </td>
-         <td><input ng-model="newFood.fat"></input></td>
-      </tr>
-   </table>
+<div class="container" ng-controller="FoodsController"> 
+   <div add-food></div>
    <br>
    <div class="container">
       <div class="row">
-         <div style="border: 1px solid; border-color: #bbd8e9; border-radius: 4px; height: 500px;" class="col-md-2 pre-scrollable">
+         <div style="border: 1px solid; border-color: #bbd8e9; border-radius: 8px;" class="col-md-2">
+            <div class="scrollable">
             <table class="center-block col-md-12">
                <div class="row">
                   <tr ng-repeat="food in foods">
@@ -44,17 +18,19 @@
                   </tr>
                </div>
             </table>
+            </div>
          </div>
          <div class="col-md-10">
-              <table width="100%" class="table table-hover table-bordered" style="border-radius: 4px">
-                  <tr>
-                     <th class="text-center col-md-8">Name</td>
-                     <th class="text-center col-md-1">Cals</td>
-                     <th class="text-center col-md-1">Protein</td>
-                     <th class="text-center col-md-1">Carbs</td>
-                     <th class="text-center col-md-1">Fat</td>
-                  </tr>
-               </table>
+           <table width="100%" class="table table-hover table-bordered" style="border-radius: 4px">
+               <tr>
+                  <th class="text-center col-md-8">Name</td>
+                  <th class="text-center col-md-1">Cals</td>
+                  <th class="text-center col-md-1">Protein</td>
+                  <th class="text-center col-md-1">Carbs</td>
+                  <th class="text-center col-md-1">Fat</td>
+               </tr>
+            </table>
+            <div class="pre-scrollable">
                <table width="100%" class="table table-hover table-bordered" ng-repeat="meal in meals">
                   <tr ng-repeat="food in meal">
                       <td class="text-center col-md-8">
@@ -74,21 +50,21 @@
                      </td>
                   </tr>
                </table>
-               <table width="100%" class="table table-hover table-bordered">
-                  <tr>
-                     <th class="text-center col-md-8">Totals</td>
-                     <td class="text-center col-md-1">{{totalCals}}</td>
-                     <td class="text-center col-md-1">{{totalProtein}}</td>
-                     <td class="text-center col-md-1">{{totalCarbs}}</td>    
-                     <td class="text-center col-md-1">{{totalFat}}</td>         
-                  </tr>
-               </table>
+            </div>
+            <br>
+            <table width="100%" class="table table-hover table-bordered">
+               <tr>
+                  <th class="text-center col-md-8">Totals</td>
+                  <td class="text-center col-md-1">{{totalCals}}</td>
+                  <td class="text-center col-md-1">{{totalProtein}}</td>
+                  <td class="text-center col-md-1">{{totalCarbs}}</td>    
+                  <td class="text-center col-md-1">{{totalFat}}</td>         
+               </tr>
+            </table>
          </div>
       </div>
    </div>
    <br>
-   <br>
-   <simple-directive></simple-directive>
    <br>
    <table border="1" width="50%">
       <tr food-item="food" ng-repeat="food in foods">

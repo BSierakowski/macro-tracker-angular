@@ -1,0 +1,36 @@
+<table>
+   <tr>
+      <td>
+         <button class="btn btn-default" ng-click="(showNewFood == false) ? showNewFood = true : showNewFood = false">New Food</button>
+      </td>
+      <td style="padding-left: 10px;">
+         <button class="btn btn-default" ng-click="addFood()">Add</button>
+      </td>
+   </tr>
+   <tr ng-show="showNewFood">
+      <td style="padding-top:10px;">   
+         <table>
+            <tr>
+               <td style="padding-right: 30px">Name: </td>
+               <td><input ng-model="newFood.name"></input></td>
+            </tr>
+            <tr>
+               <td>Cals: </td>
+               <td><input ng-model="newFood.cals"></input></td>
+            </tr>
+            <tr>
+               <td>Protein: </td>
+               <td><input ng-model="newFood.protein"></input></td>
+            </tr>
+            <tr>
+               <td>Carbs: </td>
+               <td><input ng-model="newFood.carbs"></input></td>
+            </tr>
+            <tr>
+               <td>Fat: </td>
+               <td><input ng-model="newFood.fat"></input></td>
+            </tr>
+         <table>
+      </td>
+   </tr>
+</table>

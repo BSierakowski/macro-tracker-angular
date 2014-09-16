@@ -1,18 +1,25 @@
 'use strict';
 
 app.controller('FoodsController', function($scope, foodService) {
+	// for new food inputs
+	$scope.showNewFood = false;
+
 	$scope.meals = foodService.getMeals();
-	console.log($scope.meals);
+	// console.log($scope.meals);
 	$scope.foods = foodService.getFoods();
 
 	$scope.addFood = function() {
-		$scope.foods.push({
-			name: $scope.newFood.name,
-			cals: $scope.newFood.cals,
-			protein: $scope.newFood.protein,
-			carbs: $scope.newFood.carbs,
-			fat: $scope.newFood.fat
-		});
+		if($scope.newFood !== undefined) {
+			$scope.foods.push({
+				name: $scope.newFood.name,
+				cals: $scope.newFood.cals,
+				protein: $scope.newFood.protein,
+				carbs: $scope.newFood.carbs,
+				fat: $scope.newFood.fat
+			});
+		} else {
+			alert('must input food info');
+		}
 	};
 
 	$scope.buttonAddFood = function() {
