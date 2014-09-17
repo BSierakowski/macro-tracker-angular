@@ -10,7 +10,9 @@
   "dependencies": {
     "angular": "latest",
     "angular-route": "latest",
-    "angular-ui-router": "latest",
     "bootstrap": "latest"
+  },
+  "resolutions": {
+    "angular": "1.2.25"
   }
 }

@@ -1,21 +1,22 @@
 'use strict';
 
-var app = angular.module('macroTracker', ['ngResource', 'ui.router']);
+var app = angular.module('macroTracker', ['ngResource', 'ngRoute']);
 
-app.config(function($stateProvider, $urlRouterProvider) {
+app.config(function($routeProvider, $locationProvider) {
+	$locationProvider.html5Mode(true);
 
-	$urlRouterProvider.otherwise('/');
+	$routeProvider.otherwise({ redirectTo: '/home' });
 
-	$stateProvider
-		.state('home', {
-			url: '/home',
-			templateUrl: 'public/views/partial-home.html'
-		})
-		.state('about', {
-			url: '/about'
-		})
-		.state('foods', {
-			url: '/foods',
-			templateUrl: 'public/views/partial-foods.html'
-		})
+	$routeProvider.when('/home', {
+		templateUrl: 'public/views/partial-home.html'
+	});
+	
+	$routeProvider.when('/about', {
+
+	});
+		
+	$routeProvider.when('/foods', {
+		controller: 'FoodsController',
+		templateUrl: 'public/views/partial-foods.html'
+	});
 });

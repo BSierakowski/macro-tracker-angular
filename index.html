@@ -16,12 +16,12 @@
    <!-- NAVIGATION -->
    <nav class="navbar navbar-inverse" role="navigation">
       <div class="navbar-header">
-         <a class="navbar-brand" ui-sref="#">Macro Tracker</a>
+         <a class="navbar-brand" href="/">Macro Tracker</a>
       </div>
       <ul class="nav navbar-nav">
-         <li><a ui-sref="home">Home</a></li>
-         <li><a ui-sref="about">About</a></li>
-         <li><a ui-sref="foods">Foods</a></li>
+         <li><a href="/home">Home</a></li>
+         <li><a href="/about">About</a></li>
+         <li><a href="/foods">Foods</a></li>
       </ul>
    </nav>
 
@@ -29,7 +29,7 @@
    <div class="container">
 
       <!-- INJECTED CONTENT -->
-      <div ui-view></div>
+      <div ng-view></div>
 
    </div>
 
@@ -43,7 +43,7 @@
    <script src="bower_components/jquery/dist/jquery.min.js"></script>
    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
    <script src="bower_components/angular/angular.min.js"></script>
-   <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+   <script src="bower_components/angular-route/angular-route.min.js"></script>
    <script src="bower_components/angular-resource/angular-resource.min.js"></script>
 
    <script src="public/app.js"></script>
