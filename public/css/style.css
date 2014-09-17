@@ -13,3 +13,32 @@
 	overflow: hidden;
 	overflow-y: scroll;
 }
+
+.full-width {
+	width: 100%;
+}
+
+.full-td {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.hover-highlight:hover {
+	color: #29A3CC;
+}
+
+.food-button {
+	padding-bottom: 5px; 
+	padding-top: 5px;
+}
+
+.food-cal-input {
+	 width:154px; 
+	 height: 26px;
+}
+
+#food-buttons-container {
+	border: 1px solid; 
+	border-color: #bbd8e9; 
+	border-radius: 8px;
+}

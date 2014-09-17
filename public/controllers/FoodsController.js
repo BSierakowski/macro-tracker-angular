@@ -8,8 +8,24 @@ app.controller('FoodsController', function($scope, foodService) {
 	// console.log($scope.meals);
 	$scope.foods = foodService.getFoods();
 
+	$scope.currentFoodsDate = getCurrentDate();
+
+	function getCurrentDate() {
+		var date = new Date();
+		var month = date.getMonth();
+		var day = date.getDay();
+		var year = date.getYear();
+
+		return month + '/' + day + '/' + year;
+	}
+
 	$scope.addFood = function() {
-		if($scope.newFood !== undefined) {
+		if($scope.newFood !== undefined &&
+			$scope.newFood.name !== undefined &&
+			$scope.newFood.cals !== undefined &&
+			$scope.newFood.protein !== undefined &&
+			$scope.newFood.carbs !== undefined &&
+			$scope.newFood.fat !== undefined) {
 			$scope.foods.push({
 				name: $scope.newFood.name,
 				cals: $scope.newFood.cals,
@@ -17,20 +33,11 @@ app.controller('FoodsController', function($scope, foodService) {
 				carbs: $scope.newFood.carbs,
 				fat: $scope.newFood.fat
 			});
+
+			$scope.newFood = {};
 		} else {
 			alert('must input food info');
 		}
-	};
-
-	$scope.buttonAddFood = function() {
-		var food = this.food;
-		$scope.foods.push({
-			name: food.name,
-			cals: food.cals,
-			protein: food.protein,
-			carbs: food.carbs,
-			fat: food.fat
-		});
 	};
 
 	$scope.buttonAddFoodToMeal = function() {
@@ -42,6 +49,23 @@ app.controller('FoodsController', function($scope, foodService) {
 		// 	carbs: food.carbs,
 		// 	fat: food.fat
 		// });
+		alert('would add [' + food.name + '] to the current meal');
+	};
+
+	$scope.increaseServing = function(food) {
+		alert('serving increased for: \n' + JSON.stringify(food));
+	};
+
+	$scope.decreaseServing = function(food) {
+		alert('serving decreased for: \n' + JSON.stringify(food));
+	};
+
+	$scope.previousDay = function() {
+		alert('showing previous day\'s foods');
+	};
+
+	$scope.nextDay = function() {
+		alert('showing next day\'s foods');	
 	};
 
 	$scope.$watchCollection('meals', function(newValue, oldValue) {

@@ -1,15 +1,15 @@
 <div class="container" ng-controller="FoodsController"> 
    <div add-food></div>
    <br>
-   <div class="container">
+   <input class="form-control food-cal-input" ></input>   
+   <div class="container" style="padding-top:10px;">
       <div class="row">
-         <div style="border: 1px solid; border-color: #bbd8e9; border-radius: 8px;" class="col-md-2">
-            <div class="scrollable">
+         <div id="food-buttons-container" class="col-md-2 scrollable">
             <table class="center-block col-md-12">
                <div class="row">
                   <tr ng-repeat="food in foods">
-                     <td style="padding-bottom: 5px; padding-top: 5px;">
-                        <button class="btn btn-default col-md-12" ng-click="buttonAddFoodToMeal()">
+                     <td class="food-button">
+                        <button class="btn btn-default full-width" onclick="this.blur();" ng-click="buttonAddFoodToMeal()">
                            {{food.name}}
                            <br>
                            {{food.cals}} / {{food.protein}} / {{food.carbs}} / {{food.fat}} 
@@ -18,22 +18,28 @@
                   </tr>
                </div>
             </table>
-            </div>
          </div>
          <div class="col-md-10">
            <table width="100%" class="table table-hover table-bordered" style="border-radius: 4px">
                <tr>
-                  <th class="text-center col-md-8">Name</td>
-                  <th class="text-center col-md-1">Cals</td>
-                  <th class="text-center col-md-1">Protein</td>
-                  <th class="text-center col-md-1">Carbs</td>
-                  <th class="text-center col-md-1">Fat</td>
+                  <th class="text-center col-md-1"></th>
+                  <th class="text-center col-md-5">Name</th>
+                  <th class="text-center col-md-1">Cals</th>
+                  <th class="text-center col-md-1">Protein</th>
+                  <th class="text-center col-md-1">Carbs</th>
+                  <th class="text-center col-md-1">Fat</th>
+                  <th class="text-center col-md-1">Sodium</th>
+                  <th class="text-center col-md-1">Fiber</th>
                </tr>
             </table>
             <div class="pre-scrollable">
-               <table width="100%" class="table table-hover table-bordered" ng-repeat="meal in meals">
+               <table width="100%" class="table table-bordered" ng-repeat="meal in meals">
                   <tr ng-repeat="food in meal">
-                      <td class="text-center col-md-8">
+                     <td class="text-center col-md-1">
+                        <span class="glyphicon glyphicon-arrow-up hover-highlight" ng-click="increaseServing(food)"></span>
+                        <span class="glyphicon glyphicon-arrow-down hover-highlight" ng-click="decreaseServing(food)"></span>
+                     </td>
+                     <td class="text-center col-md-5">
                         {{food.name}}
                      </td>
                      <td class="text-center col-md-1">
@@ -48,26 +54,48 @@
                      <td class="text-center col-md-1">
                         {{food.fat}}
                      </td>
+                     <td class="text-center col-md-1">
+                        0
+                     </td>
+                     <td class="text-center col-md-1">
+                        0
+                     </td>
                   </tr>
                </table>
             </div>
             <br>
             <table width="100%" class="table table-hover table-bordered">
                <tr>
-                  <th class="text-center col-md-8">Totals</td>
+                  <th class="text-center col-md-1"></th>
+                  <td class="text-center col-md-5">Totals</td>
                   <td class="text-center col-md-1">{{totalCals}}</td>
                   <td class="text-center col-md-1">{{totalProtein}}</td>
                   <td class="text-center col-md-1">{{totalCarbs}}</td>    
-                  <td class="text-center col-md-1">{{totalFat}}</td>         
+                  <td class="text-center col-md-1">{{totalFat}}</td>
+                  <td class="text-center col-md-1">0</td>    
+                  <td class="text-center col-md-1">0</td>           
                </tr>
             </table>
          </div>
       </div>
    </div>
+
+   <div class="container">
+      <table width="100%">
+         <tr>
+            <td class="col-md-10"></td>
+            <td class="col-md-2 full-td">
+               <span class="glyphicon glyphicon-arrow-left hover-highlight" ng-click="previousDay()"></span>
+               &nbsp;{{currentFoodsDate}}&nbsp;
+               <span class="glyphicon glyphicon-arrow-right hover-highlight" ng-click="nextDay()"></span>
+            </td>
+         </tr>
+      </table>
+   </div>
    <br>
    <br>
-   <table border="1" width="50%">
+   <!-- <table border="1" width="50%">
       <tr food-item="food" ng-repeat="food in foods">
       </tr>
-   </table>
+   </table> -->
 </div>
