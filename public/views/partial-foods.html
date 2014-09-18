@@ -1,13 +1,13 @@
 <div class="container" ng-controller="FoodsController"> 
    <div add-food></div>
    <br>
-   <input class="form-control food-cal-input" ></input>   
+   <input id="food-filter-input" class="form-control" placeholder="Filter by Food Name" ng-model="nameFilterValue"></input>   
    <div class="container" style="padding-top:10px;">
       <div class="row">
          <div id="food-buttons-container" class="col-md-2 scrollable">
             <table class="center-block col-md-12">
                <div class="row">
-                  <tr ng-repeat="food in foods">
+                  <tr ng-repeat="food in filteredFoods">
                      <td class="food-button">
                         <button class="btn btn-default full-width" onclick="this.blur();" ng-click="buttonAddFoodToMeal()">
                            {{food.name}}
@@ -33,8 +33,8 @@
                </tr>
             </table>
             <div class="pre-scrollable">
-               <table width="100%" class="table table-bordered" ng-repeat="meal in meals">
-                  <tr ng-repeat="food in meal">
+               <table width="100%" class="table table-bordered">
+                  <tr ng-repeat="food in meals">
                      <td class="text-center col-md-1">
                         <span class="glyphicon glyphicon-arrow-up hover-highlight" ng-click="increaseServing(food)"></span>
                         <span class="glyphicon glyphicon-arrow-down hover-highlight" ng-click="decreaseServing(food)"></span>
@@ -85,9 +85,9 @@
          <tr>
             <td class="col-md-10"></td>
             <td class="col-md-2 full-td">
-               <span class="glyphicon glyphicon-arrow-left hover-highlight" ng-click="previousDay()"></span>
+               <span class="glyphicon glyphicon-arrow-left hover-highlight" ng-click="decrementDay()"></span>
                &nbsp;{{currentFoodsDate}}&nbsp;
-               <span class="glyphicon glyphicon-arrow-right hover-highlight" ng-click="nextDay()"></span>
+               <span class="glyphicon glyphicon-arrow-right hover-highlight" ng-click="incrementDay()"></span>
             </td>
          </tr>
       </table>

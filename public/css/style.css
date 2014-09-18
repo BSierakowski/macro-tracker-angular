@@ -1,12 +1,11 @@
-/*.fixed-table-container {
-    position: relative;
-    clear: both;
-    border: 1px solid #dddddd;
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
+@font-face {
+  font-family: Kirvy;
+  src: url("../fonts/Kirvy-Regular.otf") format("opentype");
 }
-*/
+* {
+  font-family: Kirvy;
+  font-size: small;
+}
 
 .scrollable {
 	max-height: 455px;
@@ -41,4 +40,10 @@
 	border: 1px solid; 
 	border-color: #bbd8e9; 
 	border-radius: 8px;
+	height: 455px;
+}
+
+#food-filter-input {
+	 width: 195px; 
+	 height: 26px;
 }
