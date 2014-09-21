@@ -73,11 +73,29 @@ app.controller('FoodsController', function($scope, $filter, foodService) {
 	};
 
 	$scope.increaseServing = function(food) {
-		alert('serving increased for: \n' + JSON.stringify(food));
+		var prevServings = food.servings;
+		food.servings += 1;
+		food.cals = food.cals / prevServings * food.servings;
+		food.protein = food.protein / prevServings * food.servings;
+		food.carbs = food.carbs / prevServings * food.servings;
+		food.fat = food.fat / prevServings * food.servings;
+		food.sodium = food.sodium / prevServings * food.servings;
+
+		calculateTotals();
 	};
 
 	$scope.decreaseServing = function(food) {
-		alert('serving decreased for: \n' + JSON.stringify(food));
+		if(food.servings > 1) {
+			var prevServings = food.servings;
+			food.servings -= 1;
+			food.cals = food.cals / prevServings * food.servings;
+			food.protein = food.protein / prevServings * food.servings;
+			food.carbs = food.carbs / prevServings * food.servings;
+			food.fat = food.fat / prevServings * food.servings;
+			food.sodium = food.sodium / prevServings * food.servings;
+			
+			calculateTotals();
+		}
 	};
 
 	$scope.incrementDay = function() {
@@ -101,6 +119,10 @@ app.controller('FoodsController', function($scope, $filter, foodService) {
 	};
 
 	$scope.$watchCollection('meals', function(newValue, oldValue) {
+		calculateTotals();
+	});
+
+	function calculateTotals() {
 		$scope.totalCals = 0;
 		$scope.totalProtein = 0;
 		$scope.totalCarbs = 0;
@@ -111,5 +133,5 @@ app.controller('FoodsController', function($scope, $filter, foodService) {
 			$scope.totalCarbs += parseInt(food.carbs);
 			$scope.totalFat += parseInt(food.fat);
 		});
-	});
+	}
 });

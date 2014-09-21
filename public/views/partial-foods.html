@@ -37,6 +37,7 @@
                   <tr ng-repeat="food in meals">
                      <td class="text-center col-md-1">
                         <span class="glyphicon glyphicon-arrow-up hover-highlight" ng-click="increaseServing(food)"></span>
+                        {{food.servings}}
                         <span class="glyphicon glyphicon-arrow-down hover-highlight" ng-click="decreaseServing(food)"></span>
                      </td>
                      <td class="text-center col-md-5">

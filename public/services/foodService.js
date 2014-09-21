@@ -25,21 +25,21 @@ app.factory('foodService', function($resource) {
 			// yesterday.setDate(yesterday.getDate() - 1);
 
 			return [ 
-					{name: 'bread', cals: 100, protein: 10, carbs: 30, fat: 2},
-					{name: 'banana', cals: 150, protein: 1, carbs: 25, fat: 0},
-					{name: 'beef', cals: 300, protein: 20, carbs: 5, fat: 10},
-					{name: 'oatmeal', cals: 200, protein: 5, carbs: 50, fat: 2},
-					{name: 'poptart', cals: 200, protein: 2, carbs: 55, fat: 5},
-					{name: 'bread', cals: 100, protein: 10, carbs: 30, fat: 2},
-					{name: 'banana', cals: 150, protein: 1, carbs: 25, fat: 0},
-					{name: 'beef', cals: 300, protein: 20, carbs: 5, fat: 10},
-					{name: 'oatmeal', cals: 200, protein: 5, carbs: 50, fat: 2},
-					{name: 'poptart', cals: 200, protein: 2, carbs: 55, fat: 5},
-					{name: 'bread', cals: 100, protein: 10, carbs: 30, fat: 2},
-					{name: 'banana', cals: 150, protein: 1, carbs: 25, fat: 0},
-					{name: 'beef', cals: 300, protein: 20, carbs: 5, fat: 10},
-					{name: 'oatmeal', cals: 200, protein: 5, carbs: 50, fat: 2},
-					{name: 'poptart', cals: 200, protein: 2, carbs: 55, fat: 5}
+					{name: 'bread', cals: 100, protein: 10, carbs: 30, fat: 2, servings: 1},
+					{name: 'banana', cals: 150, protein: 1, carbs: 25, fat: 0, servings: 1},
+					{name: 'beef', cals: 300, protein: 20, carbs: 5, fat: 10, servings: 1},
+					{name: 'oatmeal', cals: 200, protein: 5, carbs: 50, fat: 2, servings: 1},
+					{name: 'poptart', cals: 200, protein: 2, carbs: 55, fat: 5, servings: 1},
+					{name: 'bread', cals: 100, protein: 10, carbs: 30, fat: 2, servings: 1},
+					{name: 'banana', cals: 150, protein: 1, carbs: 25, fat: 0, servings: 1},
+					{name: 'beef', cals: 300, protein: 20, carbs: 5, fat: 10, servings: 1},
+					{name: 'oatmeal', cals: 200, protein: 5, carbs: 50, fat: 2, servings: 1},
+					{name: 'poptart', cals: 200, protein: 2, carbs: 55, fat: 5, servings: 1},
+					{name: 'bread', cals: 100, protein: 10, carbs: 30, fat: 2, servings: 1},
+					{name: 'banana', cals: 150, protein: 1, carbs: 25, fat: 0, servings: 1},
+					{name: 'beef', cals: 300, protein: 20, carbs: 5, fat: 10, servings: 1},
+					{name: 'oatmeal', cals: 200, protein: 5, carbs: 50, fat: 2, servings: 1},
+					{name: 'poptart', cals: 200, protein: 2, carbs: 55, fat: 5, servings: 1}
 			];
 		}
 	};
