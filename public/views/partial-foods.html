@@ -9,7 +9,7 @@
                <div class="row">
                   <tr ng-repeat="food in filteredFoods">
                      <td class="food-button">
-                        <button class="btn btn-default full-width" onclick="this.blur();" ng-click="buttonAddFoodToMeal()">
+                        <button class="btn btn-default full-width" onclick="this.blur();" ng-click="addFoodToMeal()">
                            {{food.name}}
                            <br>
                            {{food.cals}} / {{food.protein}} / {{food.carbs}} / {{food.fat}} 
@@ -34,7 +34,7 @@
             </table>
             <div class="pre-scrollable">
                <table width="100%" class="table table-bordered">
-                  <tr ng-repeat="food in meals">
+                  <tr ng-repeat="food in currentMeal">
                      <td class="text-center col-md-1">
                         <span class="glyphicon glyphicon-arrow-up hover-highlight" ng-click="increaseServing(food)"></span>
                         {{food.servings}}
@@ -87,7 +87,7 @@
             <td class="col-md-10"></td>
             <td class="col-md-2 full-td">
                <span class="glyphicon glyphicon-arrow-left hover-highlight" ng-click="decrementDay()"></span>
-               &nbsp;{{currentFoodsDate}}&nbsp;
+               &nbsp;{{currentFoodsDate.toLocaleDateString("en-US")}}&nbsp;
                <span class="glyphicon glyphicon-arrow-right hover-highlight" ng-click="incrementDay()"></span>
             </td>
          </tr>

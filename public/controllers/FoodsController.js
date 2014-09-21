@@ -4,11 +4,9 @@ app.controller('FoodsController', function($scope, $filter, foodService) {
 	// for new food inputs
 	$scope.showNewFood = false;
 
-	$scope.meals = foodService.getMeals();
-	// console.log($scope.meals);
-	$scope.foods = foodService.getFoods();
-
 	$scope.currentFoodsDate = getCurrentDate();
+	$scope.currentMeal = getMeal($scope.currentFoodsDate);
+	$scope.foods = foodService.getFoods();
 
 	// initialize filtered foods with all foods
 	$scope.filteredFoods = $scope.foods;
@@ -24,6 +22,10 @@ app.controller('FoodsController', function($scope, $filter, foodService) {
 		$scope.$watch('nameFilterValue', function (filterInput) {
             filterFoods(filterInput);
         });
+
+        $scope.$watchCollection('currentMeal', function(newValue, oldValue) {
+			calculateTotals();
+		});
 	}
 
 	function filterFoods(filterInput) {
@@ -32,11 +34,9 @@ app.controller('FoodsController', function($scope, $filter, foodService) {
 
 	function getCurrentDate() {
 		var date = new Date();
-		var month = date.getMonth();
-		var day = date.getDay();
-		var year = date.getYear();
+		date.setHours(0, 0, 0, 0);
 
-		return month + '/' + day + '/' + year;
+		return date;
 	}
 
 	$scope.addFood = function() {
@@ -60,16 +60,16 @@ app.controller('FoodsController', function($scope, $filter, foodService) {
 		}
 	};
 
-	$scope.buttonAddFoodToMeal = function() {
+	$scope.addFoodToMeal = function() {
 		var food = this.food;
-		// $scope.foods.push({
-		// 	name: food.name,
-		// 	cals: food.cals,
-		// 	protein: food.protein,
-		// 	carbs: food.carbs,
-		// 	fat: food.fat
-		// });
-		alert('would add [' + food.name + '] to the current meal');
+		$scope.currentMeal.push({
+			name: food.name,
+			cals: food.cals,
+			protein: food.protein,
+			carbs: food.carbs,
+			fat: food.fat,
+			servings: 1
+		});
 	};
 
 	$scope.increaseServing = function(food) {
@@ -99,35 +99,34 @@ app.controller('FoodsController', function($scope, $filter, foodService) {
 	};
 
 	$scope.incrementDay = function() {
-		alert('increment day');
+		var currentDate = new Date();
+		currentDate.setHours(0, 0, 0, 0);
+		if(currentDate.valueOf() > $scope.currentFoodsDate.valueOf()) {
+			$scope.currentFoodsDate.setDate($scope.currentFoodsDate.getDate() + 1);
+			$scope.currentMeal = getMeal($scope.currentFoodsDate);
+		}
 	}
 
 	$scope.decrementDay = function() {
-		alert('decrement day');
-		// will only work if $scope.currentFoodsDate is a Date() object -- it's not right now
-		// var currentFoodsDate = $scope.currentFoodsDate;
-		// var yesterday;
-
-		// currentFoodsDate.setDate(currentFoodsDate.getDate() - 1);
-		// yesterday = currentFoodsDate;
-
-		// $scope.currentFoodsDate = yesterday.getMonth() +  '/' + yesterday.getDay() + '/' + yesterday.getYear();
+		$scope.currentFoodsDate.setDate($scope.currentFoodsDate.getDate() - 1);
+		console.log('currentFoodsDate: ' + $scope.currentFoodsDate);
+		$scope.currentMeal = getMeal($scope.currentFoodsDate);
 	};
 
 	$scope.getNextDay = function() {
 		alert('showing next day\'s foods');	
 	};
 
-	$scope.$watchCollection('meals', function(newValue, oldValue) {
-		calculateTotals();
-	});
+	function getMeal(date) {
+		return foodService.getMeal(date);
+	}
 
 	function calculateTotals() {
 		$scope.totalCals = 0;
 		$scope.totalProtein = 0;
 		$scope.totalCarbs = 0;
 		$scope.totalFat = 0;
-		$scope.meals.forEach(function(food) {
+		$scope.currentMeal.forEach(function(food) {
 			$scope.totalCals += parseInt(food.cals);
 			$scope.totalProtein += parseInt(food.protein);
 			$scope.totalCarbs += parseInt(food.carbs);
