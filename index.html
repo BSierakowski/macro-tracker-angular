@@ -14,7 +14,7 @@
 <body data-ng-app="macroTracker">
 
    <!-- NAVIGATION -->
-   <nav class="navbar navbar-inverse" role="navigation">
+   <nav class="navbar navbar-default" role="navigation">
       <div class="navbar-header">
          <a class="navbar-brand" href="#/">Macro Tracker</a>
       </div>
@@ -32,14 +32,14 @@
       <div ng-view></div>
 
    </div>
-
+<!-- 
    <br>
    <br>
    <hr />
    <footer class="text-center">
       <p><a href="mailto:bautista.giancarlo@gmail.com">Giancarlo Bautista</a></p>
    </footer>
-
+ -->
    <script src="bower_components/jquery/dist/jquery.min.js"></script>
    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
    <script src="bower_components/angular/angular.min.js"></script>
@@ -54,9 +54,11 @@
    <!-- directives -->
    <script src="public/directives/foodItem.js"></script>
    <script src="public/directives/addFood.js"></script>
+   <script src="public/directives/changeFoodTitle.js"></script>
 
    <!-- services -->
    <script src="public/services/foodService.js"></script>
+   <script src="public/services/mealService.js"></script>
 
    <!-- filters -->
    <script src="public/filters/foodFilter.js"></script>
