@@ -38,26 +38,34 @@ app.controller('FoodsController', function($scope, $filter, foodService, mealSer
 		return date;
 	}
 
-	$scope.addFood = function() {
+	$scope.addNewFood = function() {
 		if($scope.newFood !== undefined &&
-			$scope.newFood.name !== undefined &&
-			$scope.newFood.cals !== undefined &&
-			$scope.newFood.protein !== undefined &&
-			$scope.newFood.carbs !== undefined &&
-			$scope.newFood.fat !== undefined) {
-			$scope.foods.push({
-				name: $scope.newFood.name,
-				cals: $scope.newFood.cals,
-				protein: $scope.newFood.protein,
-				carbs: $scope.newFood.carbs,
-				fat: $scope.newFood.fat
-			});
+		   $scope.newFood.name !== undefined &&
+		   $scope.newFood.cals !== undefined &&
+		   $scope.newFood.protein !== undefined &&
+		   $scope.newFood.carbs !== undefined &&
+		   $scope.newFood.fat !== undefined) {
+
+			foodService.addNewFood($scope.newFood);
 
 			$scope.newFood = {};
 		} else {
 			alert('must input food info');
 		}
 	};
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	$scope.addFoodToMeal = function() {
 		var food = this.food;
@@ -79,7 +87,7 @@ app.controller('FoodsController', function($scope, $filter, foodService, mealSer
 		food.fat = food.servings * baseFood.fat;
 		food.sodium = food.servings * baseFood.sodium;
 		food.fiber = food.servings * baseFood.fiber;
-
+		
 		calculateTotals();
 	}
 

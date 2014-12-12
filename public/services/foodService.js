@@ -52,14 +52,7 @@ app.factory('foodService', function($resource) {
 				{name: 'poptart', cals: 200, protein: 2, carbs: 55, fat: 5, servings: 1},
 				{name: 'bread', cals: 100, protein: 10, carbs: 30, fat: 2, servings: 1},
 				{name: 'banana', cals: 150, protein: 1, carbs: 25, fat: 0, servings: 1},
-				{name: 'beef', cals: 300, protein: 20, carbs: 5, fat: 10, servings: 1},
-				{name: 'oatmeal', cals: 200, protein: 5, carbs: 50, fat: 2, servings: 1},
-				{name: 'poptart', cals: 200, protein: 2, carbs: 55, fat: 5, servings: 1},
-				{name: 'banana', cals: 150, protein: 1, carbs: 25, fat: 0, servings: 1},
-				{name: 'beef', cals: 300, protein: 20, carbs: 5, fat: 10, servings: 1},
-				{name: 'bread', cals: 100, protein: 10, carbs: 30, fat: 2, servings: 1},
-				{name: 'bread', cals: 100, protein: 10, carbs: 30, fat: 2, servings: 1},
-				{name: 'oatmeal', cals: 200, protein: 5, carbs: 50, fat: 2, servings: 1}			
+				{name: 'beef', cals: 300, protein: 20, carbs: 5, fat: 10, servings: 1}		
 			];
 			meals[today] = [ 
 				{name: 'bread', cals: 100, protein: 10, carbs: 30, fat: 2, servings: 1},
@@ -68,20 +61,19 @@ app.factory('foodService', function($resource) {
 				{name: 'oatmeal', cals: 200, protein: 5, carbs: 50, fat: 2, servings: 1},
 				{name: 'poptart', cals: 200, protein: 2, carbs: 55, fat: 5, servings: 1},
 				{name: 'bread', cals: 100, protein: 10, carbs: 30, fat: 2, servings: 1},
-				{name: 'banana', cals: 150, protein: 1, carbs: 25, fat: 0, servings: 1},
-				{name: 'beef', cals: 300, protein: 20, carbs: 5, fat: 10, servings: 1},
-				{name: 'oatmeal', cals: 200, protein: 5, carbs: 50, fat: 2, servings: 1},
-				{name: 'poptart', cals: 200, protein: 2, carbs: 55, fat: 5, servings: 1},
-				{name: 'bread', cals: 100, protein: 10, carbs: 30, fat: 2, servings: 1},
-				{name: 'banana', cals: 150, protein: 1, carbs: 25, fat: 0, servings: 1},
-				{name: 'beef', cals: 300, protein: 20, carbs: 5, fat: 10, servings: 1},
-				{name: 'oatmeal', cals: 200, protein: 5, carbs: 50, fat: 2, servings: 1},
-				{name: 'poptart', cals: 200, protein: 2, carbs: 55, fat: 5, servings: 1}
+				{name: 'banana', cals: 150, protein: 1, carbs: 25, fat: 0, servings: 1}
 			];
 			return meals;
 		},
-		addFood: function(date, food) {
-			
+		addFoodToMeal: function(date, food) {
+			var meal = this.getMeal(date);
+			meal.push(food);
+
+			// PUT FOOD TO SERVER
+		},
+		addNewFood: function(food) {
+			// POST food to server using $http
+
 		}
 	};
 });

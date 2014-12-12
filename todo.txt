@@ -1,0 +1,7 @@
+TODO
+
+- add servings validation
+- add new food macro validation
+- round macro values to nearest integer
+- make meal/totals table a fixed table header and footer with scrollable body
+- add recipe calculator where you can keep track of ingredients and their macros 
