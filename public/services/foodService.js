@@ -1,7 +1,7 @@
 'use strict';
 
-/* 
-	test service for now, will be making ajax calls using the 
+/*
+	test service for now, will be making ajax calls using the
 	$http service for real data when backend routes exist
 */
 app.factory('foodService', function($resource) {
@@ -34,7 +34,10 @@ app.factory('foodService', function($resource) {
 		},
 		getMeal: function(date) {
 			var meal = this.getMeals()[date];
-			return meal;
+      if(meal) {
+        return meal;
+      }
+			return [];
 		},
 		getMeals: function() {
 			var today = new Date();
@@ -52,9 +55,9 @@ app.factory('foodService', function($resource) {
 				{name: 'poptart', cals: 200, protein: 2, carbs: 55, fat: 5, servings: 1},
 				{name: 'bread', cals: 100, protein: 10, carbs: 30, fat: 2, servings: 1},
 				{name: 'banana', cals: 150, protein: 1, carbs: 25, fat: 0, servings: 1},
-				{name: 'beef', cals: 300, protein: 20, carbs: 5, fat: 10, servings: 1}		
+				{name: 'beef', cals: 300, protein: 20, carbs: 5, fat: 10, servings: 1}
 			];
-			meals[today] = [ 
+			meals[today] = [
 				{name: 'bread', cals: 100, protein: 10, carbs: 30, fat: 2, servings: 1},
 				{name: 'banana', cals: 150, protein: 1, carbs: 25, fat: 0, servings: 1},
 				{name: 'beef', cals: 300, protein: 20, carbs: 5, fat: 10, servings: 1},

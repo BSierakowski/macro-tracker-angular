@@ -1,11 +1,11 @@
 'use strict';
 
-app.controller('FoodsController', function($scope, $filter, foodService, mealService) {
+app.controller('FoodsController', function($scope, $filter, foodService, mealService, DateService) {
 	// for new food inputs
 	$scope.showNewFood = false;
 
-	$scope.currentFoodsDate = getCurrentDate();
-	$scope.currentMeal = getMeal($scope.currentFoodsDate);
+	$scope.currentMealDate = DateService.getCurrentDate();
+	$scope.currentMeal = getMeal($scope.currentMealDate);
 	$scope.foods = foodService.getFoods();
 
 	// initialize filtered foods with all foods
@@ -31,13 +31,6 @@ app.controller('FoodsController', function($scope, $filter, foodService, mealSer
 		$scope.filteredFoods = $filter('foodFilter')($scope.foods, filterInput);
 	}
 
-	function getCurrentDate() {
-		var date = new Date();
-		date.setHours(0, 0, 0, 0);
-
-		return date;
-	}
-
 	$scope.addNewFood = function() {
 		if($scope.newFood !== undefined &&
 		   $scope.newFood.name !== undefined &&
@@ -53,19 +46,6 @@ app.controller('FoodsController', function($scope, $filter, foodService, mealSer
 			alert('must input food info');
 		}
 	};
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	$scope.addFoodToMeal = function() {
 		var food = this.food;
@@ -87,7 +67,7 @@ app.controller('FoodsController', function($scope, $filter, foodService, mealSer
 		food.fat = food.servings * baseFood.fat;
 		food.sodium = food.servings * baseFood.sodium;
 		food.fiber = food.servings * baseFood.fiber;
-		
+
 		calculateTotals();
 	}
 
@@ -113,28 +93,27 @@ app.controller('FoodsController', function($scope, $filter, foodService, mealSer
 			food.carbs = food.carbs / prevServings * food.servings;
 			food.fat = food.fat / prevServings * food.servings;
 			food.sodium = food.sodium / prevServings * food.servings;
-			
+
 			calculateTotals();
 		}
 	};
 
 	$scope.incrementDay = function() {
-		var currentDate = new Date();
-		currentDate.setHours(0, 0, 0, 0);
-		if(currentDate.valueOf() > $scope.currentFoodsDate.valueOf()) {
-			$scope.currentFoodsDate.setDate($scope.currentFoodsDate.getDate() + 1);
-			$scope.currentMeal = getMeal($scope.currentFoodsDate);
-		}
+    $scope.currentMealDate.setDate(DateService.incrementDay($scope.currentMealDate));
+    $scope.currentMeal = getMeal($scope.currentMealDate);
 	}
 
 	$scope.decrementDay = function() {
-		$scope.currentFoodsDate.setDate($scope.currentFoodsDate.getDate() - 1);
-		console.log('currentFoodsDate: ' + $scope.currentFoodsDate);
-		$scope.currentMeal = getMeal($scope.currentFoodsDate);
+
+
+
+		$scope.currentMealDate.setDate($scope.currentMealDate.getDate() - 1);
+		console.log('currentMealDate: ' + $scope.currentMealDate);
+		$scope.currentMeal = getMeal($scope.currentMealDate);
 	};
 
 	$scope.getNextDay = function() {
-		alert('showing next day\'s foods');	
+		alert('showing next day\'s foods');
 	};
 
 	function getMeal(date) {
