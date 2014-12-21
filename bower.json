@@ -10,6 +10,7 @@
   "dependencies": {
     "angular": "latest",
     "angular-route": "latest",
+    "angular-resource": "latest",
     "bootstrap": "latest"
   },
   "resolutions": {
