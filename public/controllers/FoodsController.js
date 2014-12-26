@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('FoodsController', function($scope, $filter, foodService, mealService, DateService) {
+app.controller('FoodsController', function($scope, $filter, foodService, MealService, DateService) {
 	// for new food inputs
 	$scope.showNewFood = false;
 
@@ -19,10 +19,10 @@ app.controller('FoodsController', function($scope, $filter, foodService, mealSer
 
 	function createWatch() {
 		$scope.$watch('nameFilterValue', function (filterInput) {
-            filterFoods(filterInput);
-        });
+      filterFoods(filterInput);
+    });
 
-        $scope.$watchCollection('currentMeal', function(newValue, oldValue) {
+    $scope.$watchCollection('currentMeal', function(newValue, oldValue) {
 			calculateTotals();
 		});
 	}
@@ -99,17 +99,13 @@ app.controller('FoodsController', function($scope, $filter, foodService, mealSer
 	};
 
 	$scope.incrementDay = function() {
-    $scope.currentMealDate.setDate(DateService.incrementDay($scope.currentMealDate));
+    $scope.currentMealDate = DateService.incrementDay($scope.currentMealDate);
     $scope.currentMeal = getMeal($scope.currentMealDate);
 	}
 
 	$scope.decrementDay = function() {
-
-
-
-		$scope.currentMealDate.setDate($scope.currentMealDate.getDate() - 1);
-		console.log('currentMealDate: ' + $scope.currentMealDate);
-		$scope.currentMeal = getMeal($scope.currentMealDate);
+    $scope.currentmealdate = DateService.decrementDay($scope.currentMealDate);
+    $scope.currentMeal = getMeal($scope.currentMealDate);
 	};
 
 	$scope.getNextDay = function() {
@@ -121,15 +117,7 @@ app.controller('FoodsController', function($scope, $filter, foodService, mealSer
 	}
 
 	function calculateTotals() {
-		$scope.totalCals = 0;
-		$scope.totalProtein = 0;
-		$scope.totalCarbs = 0;
-		$scope.totalFat = 0;
-		$scope.currentMeal.forEach(function(food) {
-			$scope.totalCals += parseInt(food.cals);
-			$scope.totalProtein += parseInt(food.protein);
-			$scope.totalCarbs += parseInt(food.carbs);
-			$scope.totalFat += parseInt(food.fat);
-		});
+    // should MealService.calculateTotals return a meal object?
+    $scope.currentMeal.totals = MealService.calculateTotals($scope.currentMeal);
 	}
 });

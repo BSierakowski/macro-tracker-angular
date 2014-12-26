@@ -13,11 +13,22 @@ app.factory('DateService', function() {
   DateService.incrementDay = function(date) {
 		var currentDate = new Date();
 		currentDate.setHours(0, 0, 0, 0);
+
+    var returnDate;
+
     if(currentDate.valueOf() > date.valueOf()) {
-      return date.getDate() + 1;
+      date.setDate(date.getDate() + 1);
+      returnDate = date;
     } else {
-      return date.getDate();
+      returnDate = date;
     }
+
+    return returnDate;
+  }
+
+  DateService.decrementDay = function(date) {
+    date.setDate(date.getDate() - 1);
+    return date;
   }
 
   return DateService;
