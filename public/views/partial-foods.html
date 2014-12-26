@@ -6,7 +6,6 @@
       <div class="row">
          <div id="food-buttons-container" class="col-md-2 scrollable">
             <table class="col-md-12">
-               <div class="row">
                   <tr ng-repeat="food in filteredFoods | orderBy: '-name': true">
                      <td class="food-button">
                         <button class="btn btn-default full-width font-small" onclick="this.blur();" ng-click="addFoodToMeal()">
@@ -16,7 +15,6 @@
                         </button>
                      </td>
                   </tr>
-               </div>
             </table>
          </div>
          <div class="col-md-10">
