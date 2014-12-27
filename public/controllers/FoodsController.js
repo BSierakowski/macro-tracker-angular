@@ -85,6 +85,8 @@ app.controller('FoodsController', function($scope, $filter, foodService, MealSer
 	};
 
 	$scope.decreaseServing = function(food) {
+    MealService.decreaseServing(food);
+
 		if(food.servings > 1) {
 			var prevServings = food.servings;
 			food.servings -= 1;
@@ -106,10 +108,6 @@ app.controller('FoodsController', function($scope, $filter, foodService, MealSer
 	$scope.decrementDay = function() {
     $scope.currentmealdate = DateService.decrementDay($scope.currentMealDate);
     $scope.currentMeal = getMeal($scope.currentMealDate);
-	};
-
-	$scope.getNextDay = function() {
-		alert('showing next day\'s foods');
 	};
 
 	function getMeal(date) {
