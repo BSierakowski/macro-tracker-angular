@@ -85,8 +85,12 @@ app.controller('FoodsController', function($scope, $filter, foodService, MealSer
 	};
 
 	$scope.decreaseServing = function(food) {
-    MealService.decreaseServing(food);
+    // FIXME: cannot have duplicate keys (foods) in ng-repeat
+    // this breaks if you try and decrease serving on a duplicate food
+    $scope.currentMeal = MealService.decreaseServing($scope.currentMeal, food);
+    calculateTotals();
 
+    /*
 		if(food.servings > 1) {
 			var prevServings = food.servings;
 			food.servings -= 1;
@@ -98,6 +102,7 @@ app.controller('FoodsController', function($scope, $filter, foodService, MealSer
 
 			calculateTotals();
 		}
+    */
 	};
 
 	$scope.incrementDay = function() {
