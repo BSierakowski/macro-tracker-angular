@@ -43,10 +43,8 @@ app.factory('MealService', function() {
   // lookup food in meal by name
   function updateFood(meal, food) {
     for(var i = 0; i < meal.length; i++) {
-      console.log(i);
       var currentFood = meal[i];
       if (currentFood.name === food.name) {
-        console.log("found food at", i);
         meal[i] = food;
         break;
       }
