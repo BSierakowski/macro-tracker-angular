@@ -4,7 +4,7 @@ app.controller('FoodsController', function($scope, $filter, foodService, MealSer
 	// for new food inputs
 	$scope.showNewFood = false;
 
-	$scope.currentMealDate = DateService.getCurrentDate();
+	$scope.currentMealDate = DateService.getDateNow();
 	$scope.currentMeal = getMeal($scope.currentMealDate);
 	$scope.foods = foodService.getFoods();
 
@@ -48,70 +48,36 @@ app.controller('FoodsController', function($scope, $filter, foodService, MealSer
 	};
 
 	$scope.addFoodToMeal = function() {
-		var food = this.food;
-		$scope.currentMeal.push({
-			name: food.name,
-			cals: food.cals,
-			protein: food.protein,
-			carbs: food.carbs,
-			fat: food.fat,
-			servings: 1
-		});
+    MealService.addFoodToMeal($scope.currentMeal, this.food);
 	};
 
+  // update macros after servings input change
 	$scope.updateMacros = function(food) {
-		var baseFood = foodService.getFood(food.name);
-		food.cals = food.servings * baseFood.cals;
-		food.protein = food.servings * baseFood.protein;
-		food.carbs = food.servings * baseFood.carbs;
-		food.fat = food.servings * baseFood.fat;
-		food.sodium = food.servings * baseFood.sodium;
-		food.fiber = food.servings * baseFood.fiber;
-
+    MealService.updateMacros(food);
 		calculateTotals();
 	}
 
 	$scope.increaseServing = function(food) {
-		var baseFood = foodService.getFood(food.name);
-		food.servings = parseFloat(food.servings) + 1;
-		food.cals = baseFood.cals * food.servings;
-		food.protein = baseFood.protein * food.servings;
-		food.carbs = baseFood.carbs * food.servings;
-		food.fat = baseFood.fat * food.servings;
-		food.sodium = baseFood.sodium * food.servings;
-		food.fiber = baseFood.fiber * food.servings;
-
-		calculateTotals();
+    // FIXME: cannot have duplicate keys (foods) in ng-repeat
+    // this breaks if you try and decrease serving on a duplicate food
+    MealService.increaseServing($scope.currentMeal, food);
+    calculateTotals();
 	};
 
 	$scope.decreaseServing = function(food) {
     // FIXME: cannot have duplicate keys (foods) in ng-repeat
     // this breaks if you try and decrease serving on a duplicate food
-    $scope.currentMeal = MealService.decreaseServing($scope.currentMeal, food);
+    MealService.decreaseServing($scope.currentMeal, food);
     calculateTotals();
-
-    /*
-		if(food.servings > 1) {
-			var prevServings = food.servings;
-			food.servings -= 1;
-			food.cals = food.cals / prevServings * food.servings;
-			food.protein = food.protein / prevServings * food.servings;
-			food.carbs = food.carbs / prevServings * food.servings;
-			food.fat = food.fat / prevServings * food.servings;
-			food.sodium = food.sodium / prevServings * food.servings;
-
-			calculateTotals();
-		}
-    */
 	};
 
 	$scope.incrementDay = function() {
-    $scope.currentMealDate = DateService.incrementDay($scope.currentMealDate);
+    DateService.incrementDay($scope.currentMealDate);
     $scope.currentMeal = getMeal($scope.currentMealDate);
 	}
 
 	$scope.decrementDay = function() {
-    $scope.currentmealdate = DateService.decrementDay($scope.currentMealDate);
+    DateService.decrementDay($scope.currentMealDate);
     $scope.currentMeal = getMeal($scope.currentMealDate);
 	};
 

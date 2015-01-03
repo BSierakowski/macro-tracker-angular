@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('MealService', function() {
+app.factory('MealService', function(foodService) {
   var mealService = {};
 
   mealService.calculateTotals = function(meal) {
@@ -21,8 +21,28 @@ app.factory('MealService', function() {
     return totals;
   };
 
-  mealService.increaseServing = function(food) {
+  mealService.addFoodToMeal = function(currentMeal, food) {
+		currentMeal.push({
+			name: food.name,
+			cals: food.cals,
+			protein: food.protein,
+			carbs: food.carbs,
+			fat: food.fat,
+			servings: 1
+		});
+  };
 
+  mealService.increaseServing = function(currentMeal, food) {
+		var baseFood = foodService.getFood(food.name);
+		food.servings = parseFloat(food.servings) + 1;
+		food.cals = baseFood.cals * food.servings;
+		food.protein = baseFood.protein * food.servings;
+		food.carbs = baseFood.carbs * food.servings;
+		food.fat = baseFood.fat * food.servings;
+		food.sodium = baseFood.sodium * food.servings;
+		food.fiber = baseFood.fiber * food.servings;
+
+    currentMeal = updateFood(currentMeal, food);
   };
 
   mealService.decreaseServing = function(currentMeal, food) {
@@ -37,8 +57,18 @@ app.factory('MealService', function() {
     }
 
     currentMeal = updateFood(currentMeal, food);
-    return currentMeal;
   };
+
+  mealService.updateMacros = function(food) {
+		var baseFood = foodService.getFood(food.name);
+		food.cals = food.servings * baseFood.cals;
+		food.protein = food.servings * baseFood.protein;
+		food.carbs = food.servings * baseFood.carbs;
+		food.fat = food.servings * baseFood.fat;
+		food.sodium = food.servings * baseFood.sodium;
+		food.fiber = food.servings * baseFood.fiber;
+	}
+
 
   // lookup food in meal by name
   function updateFood(meal, food) {
