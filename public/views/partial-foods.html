@@ -5,25 +5,23 @@
    <div class="container" style="padding-top:10px;">
       <div class="row">
          <div id="food-buttons-container" class="col-md-2 scrollable">
-            <table class="center-block col-md-12">
-               <div class="row">
-                  <tr ng-repeat="food in filteredFoods">
+            <table class="col-md-12">
+                  <tr ng-repeat="food in filteredFoods | orderBy: '-name': true">
                      <td class="food-button">
-                        <button class="btn btn-default full-width" onclick="this.blur();" ng-click="addFoodToMeal()">
+                        <button class="btn btn-default full-width font-small" onclick="this.blur();" ng-click="addFoodToMeal()">
                            {{food.name}}
                            <br>
                            {{food.cals}} / {{food.protein}} / {{food.carbs}} / {{food.fat}} 
                         </button>
                      </td>
                   </tr>
-               </div>
             </table>
          </div>
          <div class="col-md-10">
            <table width="100%" class="table table-hover table-bordered" style="border-radius: 4px">
                <tr>
-                  <th class="text-center col-md-1"></th>
-                  <th class="text-center col-md-5">Name</th>
+                  <th class="text-center col-md-2">Servings</th>
+                  <th class="text-center col-md-4">Name</th>
                   <th class="text-center col-md-1">Cals</th>
                   <th class="text-center col-md-1">Protein</th>
                   <th class="text-center col-md-1">Carbs</th>
@@ -35,31 +33,31 @@
             <div class="pre-scrollable">
                <table width="100%" class="table table-bordered">
                   <tr ng-repeat="food in currentMeal">
-                     <td class="text-center col-md-1">
-                        <span class="glyphicon glyphicon-arrow-up hover-highlight" ng-click="increaseServing(food)"></span>
+                     <td class="text-center col-md-2 buttons-td">
+                        <button class="btn btn-default servings-button" ng-click="increaseServing(food)"><span class="glyphicon glyphicon-arrow-up"></span></button>&nbsp;&nbsp;
                         <!-- {{food.servings}} -->
-                           <input class="servings-input" ng-model="food.servings" ng-change="updateMacros(food)"</input>
-                        <span class="glyphicon glyphicon-arrow-down hover-highlight" ng-click="decreaseServing(food)"></span>
+                           <input class="servings-input" ng-model="food.servings" ng-change="updateMacros(food)"</input>&nbsp;&nbsp;
+                        <button class="btn btn-default servings-button" ng-click="decreaseServing(food)"><span class="glyphicon glyphicon-arrow-down"></span></button>
                      </td>
-                     <td class="text-center col-md-5">
+                     <td class="text-center col-md-4 food-property-td">
                         {{food.name}}
                      </td>
-                     <td class="text-center col-md-1">
+                     <td class="text-center col-md-1 food-property-td">
                         {{food.cals}}
                      </td>
-                     <td class="text-center col-md-1">
+                     <td class="text-center col-md-1 food-property-td">
                         {{food.protein}}
                      </td>
-                     <td class="text-center col-md-1">
+                     <td class="text-center col-md-1 food-property-td">
                         {{food.carbs}}
                      </td>
-                     <td class="text-center col-md-1">
+                     <td class="text-center col-md-1 food-property-td">
                         {{food.fat}}
                      </td>
-                     <td class="text-center col-md-1">
+                     <td class="text-center col-md-1 food-property-td">
                         0
                      </td>
-                     <td class="text-center col-md-1">
+                     <td class="text-center col-md-1 food-property-td">
                         0
                      </td>
                   </tr>
@@ -68,12 +66,12 @@
             <br>
             <table width="100%" class="table table-hover table-bordered">
                <tr>
-                  <th class="text-center col-md-1"></th>
-                  <td class="text-center col-md-5">Totals</td>
-                  <td class="text-center col-md-1">{{totalCals}}</td>
-                  <td class="text-center col-md-1">{{totalProtein}}</td>
-                  <td class="text-center col-md-1">{{totalCarbs}}</td>    
-                  <td class="text-center col-md-1">{{totalFat}}</td>
+                  <th class="text-center col-md-2"></th>
+                  <td class="text-center col-md-4">Totals</td>
+                  <td class="text-center col-md-1">{{currentMeal.totals.totalCals}}</td>
+                  <td class="text-center col-md-1">{{currentMeal.totals.totalProtein}}</td>
+                  <td class="text-center col-md-1">{{currentMeal.totals.totalCarbs}}</td>    
+                  <td class="text-center col-md-1">{{currentMeal.totals.totalFat}}</td>
                   <td class="text-center col-md-1">0</td>    
                   <td class="text-center col-md-1">0</td>           
                </tr>
@@ -87,9 +85,9 @@
          <tr>
             <td class="col-md-10"></td>
             <td class="col-md-2 full-td">
-               <span class="glyphicon glyphicon-arrow-left hover-highlight" ng-click="decrementDay()"></span>
-               &nbsp;{{currentFoodsDate.toLocaleDateString("en-US")}}&nbsp;
-               <span class="glyphicon glyphicon-arrow-right hover-highlight" ng-click="incrementDay()"></span>
+               <button class="btn btn-default" ng-click="decrementDay()"><span class="glyphicon glyphicon-arrow-left hover-highlight"></span></button>
+               &nbsp;{{currentMealDate.toLocaleDateString("en-US")}}&nbsp;
+               <button class="btn btn-default" ng-click="incrementDay()"><span class="glyphicon glyphicon-arrow-right hover-highlight"></span></button>
             </td>
          </tr>
       </table>
