@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('MealService', function(foodService) {
+app.factory('MealService', ['foodService', function(foodService) {
   var mealService = {};
 
   mealService.calculateTotals = function(meal) {
@@ -84,4 +84,4 @@ app.factory('MealService', function(foodService) {
   }
 
   return mealService;
-});
+}]);

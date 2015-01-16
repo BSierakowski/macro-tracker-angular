@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('FoodsController', function($scope, $filter, foodService, MealService, DateService) {
+app.controller('FoodsController', ['$scope', '$filter', 'foodService', 'MealService', 'DateService', function($scope, $filter, foodService, MealService, DateService) {
 	// for new food inputs
 	$scope.showNewFood = false;
 
@@ -89,4 +89,4 @@ app.controller('FoodsController', function($scope, $filter, foodService, MealSer
     // should MealService.calculateTotals return a meal object?
     $scope.currentMeal.totals = MealService.calculateTotals($scope.currentMeal);
 	}
-});
+}]);

@@ -1,6 +1,6 @@
 'use strict';
 
-app.directive('changeFoodTitle', function($compile) {
+app.directive('changeFoodTitle', ['$compile', function($compile) {
 	return {
 		restrict: 'A',
 		link: function(scope, elem, attr) {
@@ -13,4 +13,4 @@ app.directive('changeFoodTitle', function($compile) {
 			});
 		}
 	}
-});
+}]);

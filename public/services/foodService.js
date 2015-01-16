@@ -4,7 +4,7 @@
 	test service for now, will be making ajax calls using the
 	$http service for real data when backend routes exist
 */
-app.factory('foodService', function($resource) {
+app.factory('foodService', ['$resource', function($resource) {
 	var foods = [
 		{name: 'bread', cals: 100, protein: 10, carbs: 30, fat: 2},
 		{name: 'banana', cals: 150, protein: 1, carbs: 25, fat: 0},
@@ -79,4 +79,4 @@ app.factory('foodService', function($resource) {
 
 		}
 	};
-});
+}]);
