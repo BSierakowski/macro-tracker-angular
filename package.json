@@ -1,0 +1,10 @@
+{
+  "name": "macro-tracker",
+  "description": "Track your macros",
+  "version": "0.0.1",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-uglify": "^1.0.2"
+  }
+}
