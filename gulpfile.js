@@ -14,6 +14,10 @@ gulp.task('clean', function(cb) {
   del(['dist/assets/js'], cb);
 });
 
+gulp.task('watch', function() {
+  gulp.watch('public/**/*.js', ['scripts']);
+});
+
 gulp.task('default', ['clean'], function() {
   gulp.start('scripts');
 });
