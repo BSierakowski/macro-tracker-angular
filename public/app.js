@@ -8,15 +8,15 @@ app.config(function($routeProvider, $locationProvider) {
 	$routeProvider.otherwise({ redirectTo: '/home' });
 
 	$routeProvider.when('/home', {
-		templateUrl: 'public/views/partial-home.html'
+		templateUrl: 'views/partial-home.html'
 	});
-	
+
 	$routeProvider.when('/about', {
 
 	});
-		
+
 	$routeProvider.when('/foods', {
 		controller: 'FoodsController',
-		templateUrl: 'public/views/partial-foods.html'
+		templateUrl: 'views/partial-foods.html'
 	});
 });

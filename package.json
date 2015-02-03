@@ -1,8 +1,16 @@
 {
   "name": "macro-tracker",
-  "description": "Track your macros",
   "version": "0.0.1",
-  "dependencies": {},
+  "description": "Track your macros",
+  "author": "Giancarlo Bautista",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "~1.4.2",
+    "express": "~4.5.1",
+    "method-override": "~2.0.2",
+    "mongoose": "~3.8.0",
+    "morgan": "^1.5.1"
+  },
   "devDependencies": {
     "del": "^1.1.1",
     "gulp": "^3.8.10",
