@@ -1,21 +1,18 @@
 // MODULES =============================================
-var logger = require('morgan'),
-    express = require('express'),
-    app = express();
+var express = require('express'),
+    app = express(),
+    env = process.env.NODE_ENV || 'development',
+    config = require('./app/config/config.js')[env];
 
 // CONFIG ==============================================
-var port = process.env.PORT || 8000;
+require('./app/config/express')(app, config);
 
-app.use(logger('dev'));
-app.use(express.static(__dirname + '/public'));
+// TODO: DB config
+// TODO: PASSPORT config
 
-// ROUTES ==============================================
 require('./app/routes')(app);
 
-// start up
+var port = config.port;
 app.listen(port);
 console.log('Starting server on ' + port);
-
-// expose app
-module.exports = exports = app;
 
