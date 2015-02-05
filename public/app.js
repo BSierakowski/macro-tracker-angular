@@ -11,10 +11,6 @@ app.config(function($routeProvider, $locationProvider) {
 		templateUrl: 'views/partial-home.html'
 	});
 
-	$routeProvider.when('/about', {
-
-	});
-
 	$routeProvider.when('/foods', {
 		controller: 'FoodsController',
 		templateUrl: 'views/partial-foods.html'
