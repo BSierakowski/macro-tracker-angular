@@ -5,9 +5,9 @@ var app = angular.module('macroTracker', ['ngResource', 'ngRoute']);
 app.config(function($routeProvider, $locationProvider) {
 	// $locationProvider.html5Mode(true);
 
-	$routeProvider.otherwise({ redirectTo: '/home' });
+	$routeProvider.otherwise({ redirectTo: '/' });
 
-	$routeProvider.when('/home', {
+	$routeProvider.when('/', {
 		templateUrl: 'views/partial-home.html'
 	});
 
