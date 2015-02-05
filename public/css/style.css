@@ -2,9 +2,14 @@
   font-family: Kirvy;
   src: url("../fonts/Kirvy-Regular.otf") format("opentype");
 }
+
 * {
   font-family: Kirvy;
   font-size: small;
+}
+
+.main {
+  padding: 0px;
 }
 
 .scrollable {
