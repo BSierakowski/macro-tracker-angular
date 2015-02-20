@@ -13,7 +13,8 @@
     "mongoose": "~3.8.0",
     "morgan": "^1.5.1",
     "passport": "^0.2.1",
-    "path": "^0.11.14"
+    "path": "^0.11.14",
+    "crypto": "~0.0.3"
   },
   "devDependencies": {
     "del": "^1.1.1",

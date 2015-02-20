@@ -6,8 +6,8 @@ var express = require('express'),
 
 // CONFIG ==============================================
 require('./app/config/express')(app, config);
+require('./app/config/mongoose')(config);
 
-// TODO: DB config
 // TODO: PASSPORT config
 
 require('./app/routes')(app);
