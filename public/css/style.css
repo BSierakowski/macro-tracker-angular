@@ -27,13 +27,6 @@
   color: #FFFFFF !important;
 }
 
-.full-width {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  margin-bottom: 1em;
-}
-
 .full-td {
   padding-left: 0;
   padding-right: 0;
@@ -48,8 +41,10 @@
 }
 
 .food-button {
-  position: relative;
-  height: 5em;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 1em;
 }
 
 .food-button-row {
@@ -70,6 +65,16 @@
   border-color: #bbd8e9; 
   border-radius: 8px;
   height: 455px;
+}
+
+#food-buttons-container ul {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+#food-buttons-container ul li {
+  position: relative;
+  height: 4em;
 }
 
 #food-filter-input {

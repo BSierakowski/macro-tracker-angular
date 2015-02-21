@@ -5,17 +5,15 @@
   <div class="container" style="padding-top:10px;">
     <div class="row">
       <div id="food-buttons-container" class="col-md-2 scrollable">
-        <table class="col-md-12">
-          <tr class="food-button-row" ng-repeat="food in filteredFoods | orderBy: '-name': true">
-            <td class="food-button">
-              <button class="btn btn-default full-width font-small" onclick="this.blur();" ng-click="addFoodToMeal()">
+        <ul>
+          <li class="food-button-row" ng-repeat="food in filteredFoods | orderBy: '-name': true">
+              <button class="btn btn-default food-button font-small" onclick="this.blur();" ng-click="addFoodToMeal()">
                 {{food.name}}
                 <br>
                 {{food.calories}} / {{food.protein}} / {{food.carbs}} / {{food.fat}}
               </button>
-            </td>
-          </tr>
-        </table>
+          </li>
+        </ul>
       </div>
       <div class="col-md-10">
         <table width="100%" class="table table-hover table-bordered" style="border-radius: 4px">
