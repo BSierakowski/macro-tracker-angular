@@ -1,101 +1,95 @@
 <div class="container main">
-   <div add-food></div>
-   <br>
-   <input id="food-filter-input" class="form-control" placeholder="Filter by Food Name" ng-model="nameFilterValue"></input>
-   <div class="container" style="padding-top:10px;">
-      <div class="row">
-         <div id="food-buttons-container" class="col-md-2 scrollable">
-            <table class="col-md-12">
-                  <tr ng-repeat="food in filteredFoods | orderBy: '-name': true">
-                     <td class="food-button">
-                        <button class="btn btn-default full-width font-small" onclick="this.blur();" ng-click="addFoodToMeal()">
-                           {{food.name}}
-                           <br>
-                           {{food.calories}} / {{food.protein}} / {{food.carbs}} / {{food.fat}}
-                        </button>
-                     </td>
-                  </tr>
-            </table>
-         </div>
-         <div class="col-md-10">
-           <table width="100%" class="table table-hover table-bordered" style="border-radius: 4px">
-               <tr>
-                  <th class="text-center col-md-2">Servings</th>
-                  <th class="text-center col-md-4">Name</th>
-                  <th class="text-center col-md-1">Calories</th>
-                  <th class="text-center col-md-1">Protein</th>
-                  <th class="text-center col-md-1">Carbs</th>
-                  <th class="text-center col-md-1">Fat</th>
-                  <th class="text-center col-md-1">Sodium</th>
-                  <th class="text-center col-md-1">Fiber</th>
-               </tr>
-            </table>
-            <div class="pre-scrollable">
-               <table width="100%" class="table table-bordered">
-                  <tr ng-repeat="food in currentMeal">
-                     <td class="text-center col-md-2 buttons-td">
-                        <button class="btn btn-default servings-button" ng-click="increaseServing(food)"><span class="glyphicon glyphicon-arrow-up"></span></button>&nbsp;&nbsp;
-                        <!-- {{food.servings}} -->
-                           <input class="servings-input" ng-model="food.servings" ng-change="updateMacros(food)"</input>&nbsp;&nbsp;
-                        <button class="btn btn-default servings-button" ng-click="decreaseServing(food)"><span class="glyphicon glyphicon-arrow-down"></span></button>
-                     </td>
-                     <td class="text-center col-md-4 food-property-td">
-                        {{food.name}}
-                     </td>
-                     <td class="text-center col-md-1 food-property-td">
-                        {{food.calories}}
-                     </td>
-                     <td class="text-center col-md-1 food-property-td">
-                        {{food.protein}}
-                     </td>
-                     <td class="text-center col-md-1 food-property-td">
-                        {{food.carbs}}
-                     </td>
-                     <td class="text-center col-md-1 food-property-td">
-                        {{food.fat}}
-                     </td>
-                     <td class="text-center col-md-1 food-property-td">
-                        0
-                     </td>
-                     <td class="text-center col-md-1 food-property-td">
-                        0
-                     </td>
-                  </tr>
-               </table>
-            </div>
-            <br>
-            <table width="100%" class="table table-hover table-bordered">
-               <tr>
-                  <th class="text-center col-md-2"></th>
-                  <td class="text-center col-md-4">Totals</td>
-                  <td class="text-center col-md-1">{{currentMeal.totals.totalCals}}</td>
-                  <td class="text-center col-md-1">{{currentMeal.totals.totalProtein}}</td>
-                  <td class="text-center col-md-1">{{currentMeal.totals.totalCarbs}}</td>
-                  <td class="text-center col-md-1">{{currentMeal.totals.totalFat}}</td>
-                  <td class="text-center col-md-1">0</td>
-                  <td class="text-center col-md-1">0</td>
-               </tr>
-            </table>
-         </div>
-      </div>
-   </div>
-
-   <div class="container">
-      <table width="100%">
-         <tr>
-            <td class="col-md-10"></td>
-            <td class="col-md-2 full-td">
-               <button class="btn btn-default" ng-click="decrementDay()"><span class="glyphicon glyphicon-arrow-left hover-highlight"></span></button>
-               &nbsp;{{currentMealDate.toLocaleDateString("en-US")}}&nbsp;
-               <button class="btn btn-default" ng-click="incrementDay()"><span class="glyphicon glyphicon-arrow-right hover-highlight"></span></button>
+  <div add-food></div>
+  <br>
+  <input id="food-filter-input" class="form-control" placeholder="Filter by Food Name" ng-model="nameFilterValue"></input>
+  <div class="container" style="padding-top:10px;">
+    <div class="row">
+      <div id="food-buttons-container" class="col-md-2 scrollable">
+        <table class="col-md-12">
+          <tr class="food-button-row" ng-repeat="food in filteredFoods | orderBy: '-name': true">
+            <td class="food-button">
+              <button class="btn btn-default full-width font-small" onclick="this.blur();" ng-click="addFoodToMeal()">
+                {{food.name}}
+                <br>
+                {{food.calories}} / {{food.protein}} / {{food.carbs}} / {{food.fat}}
+              </button>
             </td>
-         </tr>
-      </table>
-   </div>
-   <br>
-   <br>
-   <!-- <table border="1" width="50%">
-      <tr food-item="food" ng-repeat="food in foods">
+          </tr>
+        </table>
+      </div>
+      <div class="col-md-10">
+        <table width="100%" class="table table-hover table-bordered" style="border-radius: 4px">
+          <tr>
+            <th class="text-center col-md-2">Servings</th>
+            <th class="text-center col-md-4">Name</th>
+            <th class="text-center col-md-1">Calories</th>
+            <th class="text-center col-md-1">Protein</th>
+            <th class="text-center col-md-1">Carbs</th>
+            <th class="text-center col-md-1">Fat</th>
+            <th class="text-center col-md-1">Sodium</th>
+            <th class="text-center col-md-1">Fiber</th>
+          </tr>
+        </table>
+        <div class="pre-scrollable">
+          <table width="100%" class="table table-bordered">
+            <tr ng-repeat="food in currentMeal">
+              <td class="text-center col-md-2 buttons-td">
+                <button class="btn btn-default servings-button" ng-click="increaseServing(food)"><span class="glyphicon glyphicon-arrow-up"></span></button>&nbsp;&nbsp;
+                <!-- {{food.servings}} -->
+                <input class="servings-input" ng-model="food.servings" ng-change="updateMacros(food)"</input>&nbsp;&nbsp;
+                <button class="btn btn-default servings-button" ng-click="decreaseServing(food)"><span class="glyphicon glyphicon-arrow-down"></span></button>
+              </td>
+              <td class="text-center col-md-4 food-property-td">
+                {{food.name}}
+              </td>
+              <td class="text-center col-md-1 food-property-td">
+                {{food.calories}}
+              </td>
+              <td class="text-center col-md-1 food-property-td">
+                {{food.protein}}
+              </td>
+              <td class="text-center col-md-1 food-property-td">
+                {{food.carbs}}
+              </td>
+              <td class="text-center col-md-1 food-property-td">
+                {{food.fat}}
+              </td>
+              <td class="text-center col-md-1 food-property-td">
+                0
+              </td>
+              <td class="text-center col-md-1 food-property-td">
+                0
+              </td>
+            </tr>
+          </table>
+        </div>
+        <br>
+        <table width="100%" class="table table-hover table-bordered">
+          <tr>
+            <th class="text-center col-md-2"></th>
+            <td class="text-center col-md-4">Totals</td>
+            <td class="text-center col-md-1">{{currentMeal.totals.totalCals}}</td>
+            <td class="text-center col-md-1">{{currentMeal.totals.totalProtein}}</td>
+            <td class="text-center col-md-1">{{currentMeal.totals.totalCarbs}}</td>
+            <td class="text-center col-md-1">{{currentMeal.totals.totalFat}}</td>
+            <td class="text-center col-md-1">0</td>
+            <td class="text-center col-md-1">0</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <table width="100%">
+      <tr>
+        <td class="col-md-10"></td>
+        <td class="col-md-2 full-td">
+          <button class="btn btn-default" ng-click="decrementDay()"><span class="glyphicon glyphicon-arrow-left hover-highlight"></span></button>
+          &nbsp;{{currentMealDate.toLocaleDateString("en-US")}}&nbsp;
+          <button class="btn btn-default" ng-click="incrementDay()"><span class="glyphicon glyphicon-arrow-right hover-highlight"></span></button>
+        </td>
       </tr>
-   </table> -->
+    </table>
+  </div>
 </div>

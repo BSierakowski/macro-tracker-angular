@@ -13,72 +13,79 @@
 }
 
 .scrollable {
-	max-height: 455px;
-	overflow: hidden;
-	overflow-y: scroll;
+  max-height: 455px;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 .colored {
-	background-color: #256188;
-	color: #FFFFFF;
+  background-color: #256188;
+  color: #FFFFFF;
 }
 
 .navbar-color {
-	color: #FFFFFF !important;
+  color: #FFFFFF !important;
 }
 
 .full-width {
-	width: 100%;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 1em;
 }
 
 .full-td {
-	padding-left: 0;
-	padding-right: 0;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .font-small {
-	font-size: small !important;
+  font-size: small !important;
 }
 
 .hover-highlight:hover {
-	color: #29A3CC;
+  color: #29A3CC;
 }
 
 .food-button {
-	padding-bottom: 5px; 
-	padding-top: 5px;
+  position: relative;
+  height: 5em;
+}
+
+.food-button-row {
+  padding-bottom: 1em;  
 }
 
 .food-cal-input {
-	 width:154px; 
-	 height: 26px;
+  width:154px; 
+  height: 26px;
 }
 
 .food-property-td {
-	padding-top: 16px !important;
+  padding-top: 16px !important;
 }
 
 #food-buttons-container {
-	border: 1px solid; 
-	border-color: #bbd8e9; 
-	border-radius: 8px;
-	height: 455px;
+  border: 1px solid; 
+  border-color: #bbd8e9; 
+  border-radius: 8px;
+  height: 455px;
 }
 
 #food-filter-input {
-	 width: 195px; 
-	 height: 26px;
+  width: 195px; 
+  height: 26px;
 }
 
 .servings-input {
-	text-align: center;
-	width: 35px;
+  text-align: center;
+  width: 35px;
 }
 
 .servings-button {
-	height: 35px;
+  height: 35px;
 }
 
 .buttons-td {
-	padding-bottom: 2px;
+  padding-bottom: 2px;
 }
