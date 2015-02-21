@@ -12,7 +12,7 @@ app.factory('MealService', ['foodService', function(foodService) {
     };
 
     meal.forEach(function(food) {
-			totals.totalCals += parseInt(food.cals);
+			totals.totalCals += parseInt(food.calories);
 			totals.totalProtein += parseInt(food.protein);
 			totals.totalCarbs += parseInt(food.carbs);
 			totals.totalFat += parseInt(food.fat);
@@ -24,7 +24,7 @@ app.factory('MealService', ['foodService', function(foodService) {
   mealService.addFoodToMeal = function(currentMeal, food) {
 		currentMeal.push({
 			name: food.name,
-			cals: food.cals,
+			calories: food.calories,
 			protein: food.protein,
 			carbs: food.carbs,
 			fat: food.fat,
@@ -35,7 +35,7 @@ app.factory('MealService', ['foodService', function(foodService) {
   mealService.increaseServing = function(currentMeal, food) {
 		var baseFood = foodService.getFood(food.name);
 		food.servings = parseFloat(food.servings) + 1;
-		food.cals = baseFood.cals * food.servings;
+		food.calories = baseFood.calories * food.servings;
 		food.protein = baseFood.protein * food.servings;
 		food.carbs = baseFood.carbs * food.servings;
 		food.fat = baseFood.fat * food.servings;
@@ -49,7 +49,7 @@ app.factory('MealService', ['foodService', function(foodService) {
 		if (food.servings > 1) {
 			var prevServings = food.servings;
 			food.servings -= 1;
-			food.cals = food.cals / prevServings * food.servings;
+			food.calories = food.calories / prevServings * food.servings;
 			food.protein = food.protein / prevServings * food.servings;
 			food.carbs = food.carbs / prevServings * food.servings;
 			food.fat = food.fat / prevServings * food.servings;
@@ -61,7 +61,7 @@ app.factory('MealService', ['foodService', function(foodService) {
 
   mealService.updateMacros = function(food) {
 		var baseFood = foodService.getFood(food.name);
-		food.cals = food.servings * baseFood.cals;
+		food.calories = food.servings * baseFood.calories;
 		food.protein = food.servings * baseFood.protein;
 		food.carbs = food.servings * baseFood.carbs;
 		food.fat = food.servings * baseFood.fat;

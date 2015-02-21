@@ -1,4 +1,4 @@
-<div class="container main" ng-controller="FoodsController">
+<div class="container main">
    <div add-food></div>
    <br>
    <input id="food-filter-input" class="form-control" placeholder="Filter by Food Name" ng-model="nameFilterValue"></input>
@@ -11,7 +11,7 @@
                         <button class="btn btn-default full-width font-small" onclick="this.blur();" ng-click="addFoodToMeal()">
                            {{food.name}}
                            <br>
-                           {{food.cals}} / {{food.protein}} / {{food.carbs}} / {{food.fat}}
+                           {{food.calories}} / {{food.protein}} / {{food.carbs}} / {{food.fat}}
                         </button>
                      </td>
                   </tr>
@@ -22,7 +22,7 @@
                <tr>
                   <th class="text-center col-md-2">Servings</th>
                   <th class="text-center col-md-4">Name</th>
-                  <th class="text-center col-md-1">Cals</th>
+                  <th class="text-center col-md-1">Calories</th>
                   <th class="text-center col-md-1">Protein</th>
                   <th class="text-center col-md-1">Carbs</th>
                   <th class="text-center col-md-1">Fat</th>
@@ -43,7 +43,7 @@
                         {{food.name}}
                      </td>
                      <td class="text-center col-md-1 food-property-td">
-                        {{food.cals}}
+                        {{food.calories}}
                      </td>
                      <td class="text-center col-md-1 food-property-td">
                         {{food.protein}}

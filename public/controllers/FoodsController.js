@@ -6,14 +6,11 @@ app.controller('FoodsController', ['$scope', '$filter', 'foodService', 'MealServ
 
 	$scope.currentMealDate = DateService.getDateNow();
 	$scope.currentMeal = getMeal($scope.currentMealDate);
-	$scope.foods = foodService.getFoods();
-
-	// initialize filtered foods with all foods
-	$scope.filteredFoods = $scope.foods;
 
 	init();
 
 	function init() {
+    getFoods();
 		createWatch();
 	}
 
@@ -27,8 +24,28 @@ app.controller('FoodsController', ['$scope', '$filter', 'foodService', 'MealServ
 		});
 	}
 
+  function getFoods() {
+    foodService.getFoods().then(
+      function(data) {
+        $scope.foods = data;
+        $scope.filteredFoods = $scope.foods;
+      },
+      function(error) {
+        console.log('ERROR! ' + error);
+      });
+  }
+
 	function filterFoods(filterInput) {
 		$scope.filteredFoods = $filter('foodFilter')($scope.foods, filterInput);
+	}
+
+	function getMeal(date) {
+		return foodService.getMeal(date);
+	}
+
+	function calculateTotals() {
+    // should MealService.calculateTotals return a meal object?
+    $scope.currentMeal.totals = MealService.calculateTotals($scope.currentMeal);
 	}
 
 	$scope.addNewFood = function() {
@@ -80,13 +97,4 @@ app.controller('FoodsController', ['$scope', '$filter', 'foodService', 'MealServ
     DateService.decrementDay($scope.currentMealDate);
     $scope.currentMeal = getMeal($scope.currentMealDate);
 	};
-
-	function getMeal(date) {
-		return foodService.getMeal(date);
-	}
-
-	function calculateTotals() {
-    // should MealService.calculateTotals return a meal object?
-    $scope.currentMeal.totals = MealService.calculateTotals($scope.currentMeal);
-	}
 }]);

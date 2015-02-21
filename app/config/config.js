@@ -3,7 +3,7 @@ var rootPath = path.normalize(__dirname + '/../../');
 module.exports = {
 	development: {
 		rootPath: rootPath,
-    //db:
+    db: 'mongodb://localhost/macro-tracker',
 		port: process.env.PORT || 8000
 	},
 	production: {

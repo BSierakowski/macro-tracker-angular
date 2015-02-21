@@ -12,11 +12,15 @@ module.exports = function(config) {
 
   var foodSchema = mongoose.Schema({
     name: String,
-    calories: Double,
-    protein: Double,
-    carbs: Double,
-    fat: Double,
-    sodium: Double,
-    fiber: Double
+    calories: Number,
+    servingUnit: String,
+    servingSize: Number,
+    protein: Number,
+    carbs: Number,
+    fat: Number,
+    sodium: Number,
+    fiber: Number
   });
+
+  mongoose.model('Food', foodSchema);
 }
