@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('FoodsController', ['$scope', '$filter', 'foodService', 'MealService', 'DateService', function($scope, $filter, foodService, MealService, DateService) {
+app.controller('FoodsController', ['$scope', '$filter', 'FoodService', 'MealService', 'DateService', function($scope, $filter, FoodService, MealService, DateService) {
   // for new food inputs
   $scope.showNewFood = false;
 
@@ -25,7 +25,7 @@ app.controller('FoodsController', ['$scope', '$filter', 'foodService', 'MealServ
   }
 
   function getFoods() {
-    foodService.getFoods().then(
+    FoodService.getFoods().then(
       function(data) {
         $scope.foods = data;
         $scope.filteredFoods = $scope.foods;
@@ -40,7 +40,7 @@ app.controller('FoodsController', ['$scope', '$filter', 'foodService', 'MealServ
   }
 
   function getMeal(date) {
-    return foodService.getMeal(date);
+    return FoodService.getMeal(date);
   }
 
   function calculateTotals() {
@@ -56,7 +56,7 @@ app.controller('FoodsController', ['$scope', '$filter', 'foodService', 'MealServ
         $scope.newFood.carbs !== undefined &&
         $scope.newFood.fat !== undefined) {
 
-      foodService.addNewFood($scope.newFood);
+      FoodService.addNewFood($scope.newFood);
 
       $scope.newFood = {};
     } else {

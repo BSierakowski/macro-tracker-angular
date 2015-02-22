@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('MealService', ['$q', 'foodService', function($q, foodService) {
+app.factory('MealService', ['$q', 'FoodService', function($q, FoodService) {
   var mealService = {};
 
   mealService.calculateTotals = function(meal) {
@@ -35,7 +35,7 @@ app.factory('MealService', ['$q', 'foodService', function($q, foodService) {
 
   mealService.increaseServing = function(currentMeal, food) {
     var baseFood;
-    foodService.getFood(food._id).then(
+    FoodService.getFood(food._id).then(
       function(data) {
         baseFood = data;
         food.servings = parseFloat(food.servings) + 1;
@@ -69,7 +69,7 @@ app.factory('MealService', ['$q', 'foodService', function($q, foodService) {
   };
 
   mealService.updateMacros = function(food) {
-		var baseFood = foodService.getFood(food._id);
+		var baseFood = FoodService.getFood(food._id);
 		food.calories = food.servings * baseFood.calories;
 		food.protein = food.servings * baseFood.protein;
 		food.carbs = food.servings * baseFood.carbs;

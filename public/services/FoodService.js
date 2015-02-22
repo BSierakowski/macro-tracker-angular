@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('foodService', ['$resource', '$q', '$http', 'foodsCache', function($resource, $q, $http, foodsCache) {
+app.factory('FoodService', ['$resource', '$q', '$http', 'foodsCache', function($resource, $q, $http, foodsCache) {
   var lookupFood = function(foods, _id) {
     var lookup = {};
     for(var i = 0; i < foods.length; i++) {
