@@ -18,10 +18,6 @@ app.controller('FoodsController', ['$scope', '$filter', 'FoodService', 'MealServ
     $scope.$watch('nameFilterValue', function (filterInput) {
       filterFoods(filterInput);
     });
-
-    $scope.$watchCollection('currentMeal', function(newValue, oldValue) {
-      calculateTotals();
-    });
   }
 
   function getFoods() {
@@ -41,11 +37,6 @@ app.controller('FoodsController', ['$scope', '$filter', 'FoodService', 'MealServ
 
   function getMeal(date) {
     return FoodService.getMeal(date);
-  }
-
-  function calculateTotals() {
-    // should MealService.calculateTotals return a meal object?
-    $scope.currentMeal.totals = MealService.calculateTotals($scope.currentMeal);
   }
 
   $scope.addNewFood = function() {
@@ -71,21 +62,18 @@ app.controller('FoodsController', ['$scope', '$filter', 'FoodService', 'MealServ
   // update macros after servings input change
   $scope.updateMacros = function(food) {
     MealService.updateMacros(food);
-    calculateTotals();
   }
 
   $scope.increaseServing = function(food) {
     // FIXME: cannot have duplicate keys (foods) in ng-repeat
     // this breaks if you try and decrease serving on a duplicate food
     MealService.increaseServing($scope.currentMeal, food);
-    calculateTotals();
   };
 
   $scope.decreaseServing = function(food) {
     // FIXME: cannot have duplicate keys (foods) in ng-repeat
     // this breaks if you try and decrease serving on a duplicate food
     MealService.decreaseServing($scope.currentMeal, food);
-    calculateTotals();
   };
 
   $scope.incrementDay = function() {

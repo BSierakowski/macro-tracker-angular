@@ -71,12 +71,20 @@ app.factory('FoodService', ['$resource', '$q', '$http', 'foodsCache', function($
 			var meals = {};
 			meals[yesterday] = [
 				{_id: "54e831ee1cce599395e484fe", name: 'Chicken', calories: 120, protein: 26, carbs: 0, fat: 1.5, sodium: 72, fiber: 0, servingSize: 1, servings: 1},
-        {_id: "54e831ee1cce599395e484f3", name: 'Strawberry Poptart', calories: 400, protein: 4, carbs: 76, fat: 1, sodium: 72, fiber: 0, servingSize: 2, servings: 1},
+        {_id: "54e831ee1cce599395e484f3", name: 'Strawberry Poptart', calories: 400, protein: 4, carbs: 76, fat: 10, sodium: 336, fiber: 0, servingSize: 2, servings: 1},
 				{_id: "54e831ee1cce599395e48507", name: '95\/5 Ground Beef', calories: 164, protein: 25, carbs: 0, fat: 6, sodium: 0, fiber: 0, servingSize: 1, servings: 1},
 				{_id: "54e831ee1cce599395e484f4", name: 'Oatmeal', calories: 150, protein: 5, carbs: 27, fat: 3, sodium: 0, fiber: 0, servingSize: 1, servings: 1},
 				{_id: "54e831ee1cce599395e4855b", name: 'Whole Grain Bread ', calories: 100, protein: 5, carbs: 20, fat: 2, sodium: 120, fiber: 0, servingSize: 1, servings: 1},
 				{_id: "54e831ee1cce599395e484f5", name: 'Banana', calories: 105, protein: 1, carbs: 27, fat: 0, sodium: 0, fiber: 0, servingSize: 1, servings: 1},
 			];
+      meals[yesterday].totals = {
+        totalCals: 1039,
+        totalProtein: 66,
+        totalCarbs: 150,
+        totalFat: 13,
+        totalSodium: 528/24,
+        totalFiber: 0
+      };
 			meals[today] = [
         {_id: "54e831ee1cce599395e484f3", name: 'Strawberry Poptart', calories: 400, protein: 4, carbs: 76, fat: 1, sodium: 72, fiber: 0, servingSize: 2, servings: 1},
 				{_id: "54e831ee1cce599395e484fe", name: 'Chicken', calories: 120, protein: 26, carbs: 0, fat: 1.5, sodium: 72, fiber: 0, servingSize: 1, servings: 1},
@@ -85,6 +93,14 @@ app.factory('FoodService', ['$resource', '$q', '$http', 'foodsCache', function($
 				{_id: "54e831ee1cce599395e48507", name: '95\/5 Ground Beef', calories: 164, protein: 25, carbs: 0, fat: 6, sodium: 0, fiber: 0, servingSize: 1, servings: 1},
 				{_id: "54e831ee1cce599395e4855b", name: 'Whole Grain Bread ', calories: 100, protein: 5, carbs: 20, fat: 2, sodium: 120, fiber: 0, servingSize: 1, servings: 1}
 			];
+      meals[today].totals = {
+        totalCals: 1039,
+        totalProtein: 66,
+        totalCarbs: 150,
+        totalFat: 13,
+        totalSodium: parseFloat(528/24),
+        totalFiber: 0
+      };
 			return meals;
 		},
 		addFoodToMeal: function(date, food) {
