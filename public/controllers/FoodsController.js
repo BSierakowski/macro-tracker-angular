@@ -26,13 +26,13 @@ app.controller('FoodsController', ['$scope', '$filter', 'foodService', 'MealServ
 
   function getFoods() {
     foodService.getFoods().then(
-        function(data) {
-          $scope.foods = data;
-          $scope.filteredFoods = $scope.foods;
-        },
-        function(error) {
-          console.log('ERROR! ' + error);
-        });
+      function(data) {
+        $scope.foods = data;
+        $scope.filteredFoods = $scope.foods;
+      },
+      function(error) {
+        console.log('ERROR! ' + error);
+      });
   }
 
   function filterFoods(filterInput) {

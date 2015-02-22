@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('MealService', ['foodService', function(foodService) {
+app.factory('MealService', ['$q', 'foodService', function($q, foodService) {
   var mealService = {};
 
   mealService.calculateTotals = function(meal) {
@@ -23,6 +23,7 @@ app.factory('MealService', ['foodService', function(foodService) {
 
   mealService.addFoodToMeal = function(currentMeal, food) {
 		currentMeal.push({
+      _id: food._id,
 			name: food.name,
 			calories: food.calories,
 			protein: food.protein,
@@ -33,16 +34,24 @@ app.factory('MealService', ['foodService', function(foodService) {
   };
 
   mealService.increaseServing = function(currentMeal, food) {
-		var baseFood = foodService.getFood(food.name);
-		food.servings = parseFloat(food.servings) + 1;
-		food.calories = baseFood.calories * food.servings;
-		food.protein = baseFood.protein * food.servings;
-		food.carbs = baseFood.carbs * food.servings;
-		food.fat = baseFood.fat * food.servings;
-		food.sodium = baseFood.sodium * food.servings;
-		food.fiber = baseFood.fiber * food.servings;
+    var baseFood;
+    foodService.getFood(food._id).then(
+      function(data) {
+        baseFood = data;
+        food.servings = parseFloat(food.servings) + 1;
+        food.calories = baseFood.calories * food.servings;
+        food.protein = baseFood.protein * food.servings;
+        food.carbs = baseFood.carbs * food.servings;
+        food.fat = baseFood.fat * food.servings;
+        food.sodium = baseFood.sodium * food.servings;
+        food.fiber = baseFood.fiber * food.servings;
 
-    currentMeal = updateFood(currentMeal, food);
+        currentMeal = updateFood(currentMeal, food);
+        // update totals here instead on currentMeal object
+      },
+      function(error) {
+        // fail silently
+      });
   };
 
   mealService.decreaseServing = function(currentMeal, food) {
@@ -54,13 +63,13 @@ app.factory('MealService', ['foodService', function(foodService) {
 			food.carbs = food.carbs / prevServings * food.servings;
 			food.fat = food.fat / prevServings * food.servings;
 			food.sodium = food.sodium / prevServings * food.servings;
-    }
 
-    currentMeal = updateFood(currentMeal, food);
+      currentMeal = updateFood(currentMeal, food);
+    }
   };
 
   mealService.updateMacros = function(food) {
-		var baseFood = foodService.getFood(food.name);
+		var baseFood = foodService.getFood(food._id);
 		food.calories = food.servings * baseFood.calories;
 		food.protein = food.servings * baseFood.protein;
 		food.carbs = food.servings * baseFood.carbs;
