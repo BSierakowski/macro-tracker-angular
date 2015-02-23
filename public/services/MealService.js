@@ -9,7 +9,6 @@ app.factory('MealService', ['$q', 'FoodService', function($q, FoodService) {
         break;
       }
     }
-    return meal;
   }
 
   function calculateTotals(meal) {
@@ -54,7 +53,7 @@ app.factory('MealService', ['$q', 'FoodService', function($q, FoodService) {
           food.sodium = baseFood.sodium * food.servings;
           food.fiber = baseFood.fiber * food.servings;
 
-          currentMeal = updateFood(currentMeal, food);
+          updateFood(currentMeal, food);
           calculateTotals(currentMeal);
         },
         function(error) {
@@ -71,11 +70,11 @@ app.factory('MealService', ['$q', 'FoodService', function($q, FoodService) {
         food.fat = food.fat / prevServings * food.servings;
         food.sodium = food.sodium / prevServings * food.servings;
 
-        currentMeal = updateFood(currentMeal, food);
+        updateFood(currentMeal, food);
         calculateTotals(currentMeal);
       }
     },
-    updateMacros: function(food) {
+    updateMacros: function(currentMeal, food) {
       var baseFood;
       FoodService.getFood(food._id).then(
         function(data) {
@@ -87,8 +86,8 @@ app.factory('MealService', ['$q', 'FoodService', function($q, FoodService) {
           food.sodium = food.servings * baseFood.sodium;
           food.fiber = food.servings * baseFood.fiber;
 
-          currentMeal = updateFood(currentMeal, food);
-          // update totals here instead on currentMeal object
+          updateFood(currentMeal, food);
+          calculateTotals(currentMeal);
         },
         function(error) {
           // fail silently

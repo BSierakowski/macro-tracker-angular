@@ -33,7 +33,6 @@
             <tr ng-repeat="food in currentMeal">
               <td class="text-center col-md-2 buttons-td">
                 <button class="btn btn-default servings-button" ng-click="increaseServing(food)"><span class="glyphicon glyphicon-arrow-up"></span></button>&nbsp;&nbsp;
-                <!-- {{food.servings}} -->
                 <input class="servings-input" ng-model="food.servings" ng-change="updateMacros(food)"</input>&nbsp;&nbsp;
                 <button class="btn btn-default servings-button" ng-click="decreaseServing(food)"><span class="glyphicon glyphicon-arrow-down"></span></button>
               </td>
