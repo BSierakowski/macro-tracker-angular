@@ -79,6 +79,10 @@ app.factory('MealService', ['$q', 'FoodService', function($q, FoodService) {
       FoodService.getFood(food._id).then(
         function(data) {
           baseFood = data;
+          if (isNaN(food.servings)) {
+            food.servings = 0;
+          }
+
           food.calories = food.servings * baseFood.calories;
           food.protein = food.servings * baseFood.protein;
           food.carbs = food.servings * baseFood.carbs;
