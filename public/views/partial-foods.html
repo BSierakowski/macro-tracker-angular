@@ -7,11 +7,11 @@
       <div id="food-buttons-container" class="col-md-2 scrollable">
         <ul>
           <li class="food-button-row" ng-repeat="food in filteredFoods | orderBy: '-name': true">
-              <button class="btn btn-default food-button font-small" onclick="this.blur();" ng-click="addFoodToMeal()">
-                {{food.name}}
-                <br>
-                {{food.calories}} / {{food.protein}} / {{food.carbs}} / {{food.fat}}
-              </button>
+          <button class="btn btn-default food-button font-small" onclick="this.blur();" ng-click="addFoodToMeal()">
+            {{food.name}}
+            <br>
+            {{food.calories}} / {{food.protein}} / {{food.carbs}} / {{food.fat}}
+          </button>
           </li>
         </ul>
       </div>
@@ -40,22 +40,22 @@
                 {{food.name}}
               </td>
               <td class="text-center col-md-1 food-property-td">
-                {{food.calories}}
+                {{food.calories | number:0}}
               </td>
               <td class="text-center col-md-1 food-property-td">
-                {{food.protein}}
+                {{food.protein | number:0}}
               </td>
               <td class="text-center col-md-1 food-property-td">
-                {{food.carbs}}
+                {{food.carbs | number:0}}
               </td>
               <td class="text-center col-md-1 food-property-td">
-                {{food.fat}}
+                {{food.fat | number:0}}
               </td>
               <td class="text-center col-md-1 food-property-td">
-                0
+                {{food.sodium | number:0}}
               </td>
               <td class="text-center col-md-1 food-property-td">
-                0
+                {{food.fiber | number:0}}
               </td>
             </tr>
           </table>
