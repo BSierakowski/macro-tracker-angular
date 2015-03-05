@@ -16,7 +16,9 @@ app.factory('MealService', ['$q', 'FoodService', function($q, FoodService) {
       totalCals: 0,
       totalProtein: 0,
       totalCarbs: 0,
-      totalFat: 0
+      totalFat: 0,
+      totalSodium: 0,
+      totalFiber: 0
     };
 
     meal.forEach(function(food) {
@@ -24,6 +26,8 @@ app.factory('MealService', ['$q', 'FoodService', function($q, FoodService) {
       meal.totals.totalProtein += parseInt(food.protein);
       meal.totals.totalCarbs += parseInt(food.carbs);
       meal.totals.totalFat += parseInt(food.fat);
+      meal.totals.totalSodium += parseInt(food.sodium);
+      meal.totals.totalFiber += parseInt(food.fiber);
     });
   }
 
