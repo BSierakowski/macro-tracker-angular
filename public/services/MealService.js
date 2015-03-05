@@ -40,29 +40,24 @@ app.factory('MealService', ['$q', 'FoodService', function($q, FoodService) {
         protein: food.protein,
         carbs: food.carbs,
         fat: food.fat,
+        sodium: food.sodium,
+        fiber: food.fiber,
         servings: 1
       });
       calculateTotals(currentMeal);
     },
     increaseServing: function(currentMeal, food) {
-      var baseFood;
-      FoodService.getFood(food._id).then(
-        function(data) {
-          baseFood = data;
-          food.servings = parseFloat(food.servings) + 1;
-          food.calories = baseFood.calories * food.servings;
-          food.protein = baseFood.protein * food.servings;
-          food.carbs = baseFood.carbs * food.servings;
-          food.fat = baseFood.fat * food.servings;
-          food.sodium = baseFood.sodium * food.servings;
-          food.fiber = baseFood.fiber * food.servings;
+      var floatServings = parseFloat(food.servings);
+      var servingsRatio = (floatServings + 1) / floatServings;
+      food.servings = floatServings + 1;
+      food.calories = food.calories * servingsRatio;
+      food.protein = food.protein * servingsRatio;
+      food.carbs = food.carbs * servingsRatio;
+      food.fat = food.fat * servingsRatio;
+      food.sodium = food.sodium * servingsRatio;
+      food.fiber = food.fiber * servingsRatio;
 
-          updateFood(currentMeal, food);
-          calculateTotals(currentMeal);
-        },
-        function(error) {
-          // fail silently
-        });
+      calculateTotals(currentMeal);
     },
     decreaseServing: function(currentMeal, food) {
       if (food.servings > 1) {
