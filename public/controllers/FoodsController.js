@@ -55,8 +55,8 @@ app.controller('FoodsController', ['$scope', '$filter', 'FoodService', 'MealServ
     }
   };
 
-  $scope.addFoodToMeal = function() {
-    MealService.addFoodToMeal($scope.currentMeal, this.food);
+  $scope.addFoodToMeal = function(food) {
+    MealService.addFoodToMeal($scope.currentMeal, food);
   };
 
   // update macros after servings input change
