@@ -81,8 +81,12 @@ app.factory('MealService', ['$q', 'FoodService', function($q, FoodService) {
       FoodService.getFood(food._id).then(
         function(data) {
           baseFood = data;
+          // TODO: food.servings should be validated as a number BEFORE here
+          // think about using a directive
           if (isNaN(food.servings)) {
             food.servings = 0;
+          } else if (food.servings % 1 !== 0) {
+            food.servings = Math.round(parseFloat(food.servings) * 100) / 100;
           }
 
           food.calories = food.servings * baseFood.calories;
