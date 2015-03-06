@@ -11,7 +11,10 @@
             onclick="this.blur();" ng-click="addFoodToMeal(food)">
             {{food.name}}
             <br>
-            {{food.calories}} / {{food.protein}} / {{food.carbs}} / {{food.fat}}
+            <span class="food-button-macros">
+              {{food.calories}} - {{food.protein}} - {{food.carbs}} -
+              {{food.fat}} - {{food.sodium}} - {{food.fiber}}
+            </span>
           </button>
           </li>
         </ul>
@@ -33,8 +36,8 @@
           <table width="100%" class="table table-bordered">
             <tr ng-repeat="food in currentMeal">
               <td class="text-center col-md-2 buttons-td">
-                <button class="btn btn-default servings-button" ng-click="increaseServing(food)"><span class="glyphicon glyphicon-arrow-up"></span></button>&nbsp;&nbsp;
-                <input class="servings-input" ng-model="food.servings" ng-change="updateMacros(food)"</input>&nbsp;&nbsp;
+                <button class="btn btn-default servings-button" ng-click="increaseServing(food)"><span class="glyphicon glyphicon-arrow-up"></span></button>
+                <input class="servings-input" ng-model="food.servings" ng-change="updateMacros(food)"</input>
                 <button class="btn btn-default servings-button" ng-click="decreaseServing(food)"><span class="glyphicon glyphicon-arrow-down"></span></button>
               </td>
               <td class="text-center col-md-4 food-property-td">

@@ -47,9 +47,10 @@ app.factory('MealService', ['$q', 'FoodService', function($q, FoodService) {
       calculateTotals(currentMeal);
     },
     increaseServing: function(currentMeal, food) {
-      var floatServings = parseFloat(food.servings);
-      var servingsRatio = (floatServings + 1) / floatServings;
-      food.servings = floatServings + 1;
+      var prevServings = parseFloat(food.servings);
+      food.servings = prevServings + 1;
+      var servingsRatio = food.servings / prevServings;
+
       food.calories = food.calories * servingsRatio;
       food.protein = food.protein * servingsRatio;
       food.carbs = food.carbs * servingsRatio;
@@ -61,15 +62,17 @@ app.factory('MealService', ['$q', 'FoodService', function($q, FoodService) {
     },
     decreaseServing: function(currentMeal, food) {
       if (food.servings > 1) {
-        var prevServings = food.servings;
+        var prevServings = parseFloat(food.servings);
         food.servings -= 1;
-        food.calories = food.calories / prevServings * food.servings;
-        food.protein = food.protein / prevServings * food.servings;
-        food.carbs = food.carbs / prevServings * food.servings;
-        food.fat = food.fat / prevServings * food.servings;
-        food.sodium = food.sodium / prevServings * food.servings;
+        var servingsRatio = food.servings / prevServings;
 
-        updateFood(currentMeal, food);
+        food.calories = food.calories * servingsRatio;
+        food.protein = food.protein * servingsRatio;
+        food.carbs = food.carbs * servingsRatio;
+        food.fat = food.fat * servingsRatio;
+        food.sodium = food.sodium * servingsRatio;
+        food.fiber = food.fiber * servingsRatio;
+
         calculateTotals(currentMeal);
       }
     },
@@ -78,8 +81,12 @@ app.factory('MealService', ['$q', 'FoodService', function($q, FoodService) {
       FoodService.getFood(food._id).then(
         function(data) {
           baseFood = data;
+          // TODO: food.servings should be validated as a number BEFORE here
+          // think about using a directive
           if (isNaN(food.servings)) {
             food.servings = 0;
+          } else if (food.servings % 1 !== 0) {
+            food.servings = Math.round(parseFloat(food.servings) * 100) / 100;
           }
 
           food.calories = food.servings * baseFood.calories;
