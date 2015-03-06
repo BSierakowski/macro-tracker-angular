@@ -11,7 +11,10 @@
             onclick="this.blur();" ng-click="addFoodToMeal(food)">
             {{food.name}}
             <br>
-            {{food.calories}} / {{food.protein}} / {{food.carbs}} / {{food.fat}}
+            <span class="food-button-macros">
+              {{food.calories}} - {{food.protein}} - {{food.carbs}} -
+              {{food.fat}} - {{food.sodium}} - {{food.fiber}}
+            </span>
           </button>
           </li>
         </ul>
