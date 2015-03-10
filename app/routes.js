@@ -3,7 +3,7 @@ var bodyParser = require('body-parser'),
     Food = mongoose.model('Food');
 
 module.exports = function(app) {
-	// SERVER ROUTES =======================================
+  // SERVER ROUTES =======================================
 
   // get all foods
   app.get('/foods', function(req, res) {
@@ -14,11 +14,7 @@ module.exports = function(app) {
     });
   });
 
-  // TODO: how to get a unique food? only name is of interest and they
-	// default route
-
-	app.get('*', function(req, res) {
-		res.send('index.html');
-	});
-  // may not be unique
+  app.get('*', function(req, res) {
+    res.send('index.html');
+  });
 }
