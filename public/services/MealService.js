@@ -1,14 +1,25 @@
 'use strict';
 
 app.factory('MealService', ['$q', 'FoodService', function($q, FoodService) {
-  function updateFood(meal, food) {
-    for(var i = 0; i < meal.length; i++) {
-      var currentFood = meal[i];
-      if (currentFood.name === food.name) {
-        meal[i] = food;
-        break;
-      }
-    }
+  function constructBaseMacros(food) {
+    var servings = parseFloat(food.servings);
+    var calories = food.calories / servings;
+    var protein = food.protein / servings;
+    var carbs = food.carbs / servings;
+    var fat = food.fat / servings;
+    var sodium = food.sodium / servings;
+    var fiber = food.fiber / servings;
+
+    var baseMacros = {
+      calories: calories,
+      protein: protein,
+      carbs: carbs,
+      fat: fat,
+      sodium: sodium,
+      fiber: fiber
+    };
+
+    return baseMacros;
   }
 
   function calculateTotals(meal) {
@@ -33,6 +44,7 @@ app.factory('MealService', ['$q', 'FoodService', function($q, FoodService) {
 
   return {
     addFoodToMeal: function(currentMeal, food) {
+      var baseMacros = constructBaseMacros(food);
       currentMeal.push({
         _id: food._id,
         name: food.name,
@@ -42,7 +54,8 @@ app.factory('MealService', ['$q', 'FoodService', function($q, FoodService) {
         fat: food.fat,
         sodium: food.sodium,
         fiber: food.fiber,
-        servings: 1
+        servings: 1,
+        baseMacros: baseMacros
       });
       calculateTotals(currentMeal);
     },
@@ -77,31 +90,25 @@ app.factory('MealService', ['$q', 'FoodService', function($q, FoodService) {
       }
     },
     updateMacros: function(currentMeal, food) {
-      var baseFood;
-      FoodService.getFood(food._id).then(
-        function(data) {
-          baseFood = data;
-          // TODO: food.servings should be validated as a number BEFORE here
-          // think about using a directive
-          if (isNaN(food.servings)) {
-            food.servings = 0;
-          } else if (food.servings % 1 !== 0) {
-            food.servings = Math.round(parseFloat(food.servings) * 100) / 100;
-          }
+      // TODO: food.servings should be validated as a number BEFORE here
+      // think about using a directive
+      if (isNaN(food.servings)) {
+        food.servings = 0;
+      } else if (food.servings % 1 !== 0) {
+        food.servings = parseFloat(parseFloat(food.servings).toFixed(2));
+      }
 
-          food.calories = food.servings * baseFood.calories;
-          food.protein = food.servings * baseFood.protein;
-          food.carbs = food.servings * baseFood.carbs;
-          food.fat = food.servings * baseFood.fat;
-          food.sodium = food.servings * baseFood.sodium;
-          food.fiber = food.servings * baseFood.fiber;
+      var baseMacros = food.baseMacros;
+      var servings = food.servings;
 
-          updateFood(currentMeal, food);
-          calculateTotals(currentMeal);
-        },
-        function(error) {
-          // fail silently
-        });
+      food.calories = servings * baseMacros.calories;
+      food.protein = servings * baseMacros.protein;
+      food.carbs = servings * baseMacros.carbs;
+      food.fat = servings * baseMacros.fat;
+      food.sodium = servings * baseMacros.sodium;
+      food.fiber = servings * baseMacros.fiber;
+
+      calculateTotals(currentMeal);
     }
   }
 }]);
