@@ -22,5 +22,12 @@ module.exports = function(config) {
     fiber: Number
   });
 
+  var mealSchema = mongoose.Schema({
+    date: Date,
+    foods: Array,
+    totals: Object
+  });
+
   mongoose.model('Food', foodSchema);
+  mongoose.model('Meal', mealSchema);
 }
