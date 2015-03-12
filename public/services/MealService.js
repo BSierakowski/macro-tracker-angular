@@ -32,7 +32,7 @@ app.factory('MealService', ['$q', 'FoodService', function($q, FoodService) {
       totalFiber: 0
     };
 
-    meal.forEach(function(food) {
+    meal.foods.forEach(function(food) {
       meal.totals.totalCals += parseInt(food.calories);
       meal.totals.totalProtein += parseInt(food.protein);
       meal.totals.totalCarbs += parseInt(food.carbs);
@@ -44,8 +44,9 @@ app.factory('MealService', ['$q', 'FoodService', function($q, FoodService) {
 
   return {
     addFoodToMeal: function(currentMeal, food) {
+      food.servings = 1;
       var baseMacros = constructBaseMacros(food);
-      currentMeal.push({
+      currentMeal.foods.push({
         _id: food._id,
         name: food.name,
         calories: food.calories,
@@ -54,7 +55,7 @@ app.factory('MealService', ['$q', 'FoodService', function($q, FoodService) {
         fat: food.fat,
         sodium: food.sodium,
         fiber: food.fiber,
-        servings: 1,
+        servings: food.servings,
         baseMacros: baseMacros
       });
       calculateTotals(currentMeal);

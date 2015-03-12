@@ -1,13 +1,22 @@
 'use strict';
 
-app.factory('FoodService', ['$resource', '$q', '$http', 'foodsCache', function($resource, $q, $http, foodsCache) {
-  var lookupFood = function(foods, _id) {
+app.factory('FoodService', ['$resource', '$q', '$http', 'foodsCache', 'mealsCache', function($resource, $q, $http, foodsCache, mealsCache) {
+  function lookupFood(foods, _id) {
     var lookup = {};
     for(var i = 0; i < foods.length; i++) {
       lookup[foods[i]._id] = foods[i];
     }
 
     return lookup[_id];
+  }
+
+  function lookupMeal(meals, date) {
+    var lookup = {};
+    for(var i = 0; i < meals.length; i++) {
+      lookup[meals[i].date] = meals[i];
+    }
+
+    return lookup[date];
   }
 
   return {
@@ -42,7 +51,7 @@ app.factory('FoodService', ['$resource', '$q', '$http', 'foodsCache', function($
       } else {
         $http.get('/foods')
         .success(function(data, status, headers, config) {
-          window.foods = data;
+          foods = data;
           foodsCache.put('foods', data);
           deferred.resolve(data);
         })
@@ -54,63 +63,64 @@ app.factory('FoodService', ['$resource', '$q', '$http', 'foodsCache', function($
       }
     },
     getMeal: function(date) {
-      var meal = this.getMeals()[date];
-      if(meal) {
-        return meal;
+      var meals = mealsCache.get('meals');
+      var meal;
+      var deferred = $q.defer();
+
+      if (meals) {
+        meal = lookupMeal(meals, date);
+        deferred.resolve(meal);
+      } else {
+        this.getMeals().then(
+          function(data) {
+          meal = lookupMeal(data, date);
+
+          //TODO: where and how should i generate date? same as DateService?
+          if (!meal) {
+            meal = {
+              date: "03-12-2015",
+              foods: []
+            };
+          }
+          deferred.resolve(meal);
+        },
+        function(error) {
+          deferred.reject(error);
+        });
       }
-      return [];
+
+      return deferred.promise;
     },
     getMeals: function() {
-      var today = new Date();
-      today.setHours(0, 0, 0, 0);
+      //TODO: limit meals cache to current and x previous
+      var meals = mealsCache.get('meals');
+      var deferred = $q.defer();
 
-      var yesterday = new Date();
-      yesterday.setDate(today.getDate() - 1);
-      yesterday.setHours(0, 0, 0, 0);
+      if (meals) {
+        deferred.resolve(meals);
+        return deferred.promise;
+      } else {
+        $http.get('/meals')
+        .success(function(data, status, headers, config) {
+          meals = data;
+          mealsCache.put('meals', data);
+          deferred.resolve(data);
+        })
+        .error(function(data, status, headers, config) {
+          deferred.reject(data);
+        });
 
-      var meals = {};
-      meals[yesterday] = [
-        {_id: "54e831ee1cce599395e484fe", name: 'Chicken', calories: 120, protein: 26, carbs: 0, fat: 1.5, sodium: 72, fiber: 0, servingSize: 1, servings: 1},
-        {_id: "54e831ee1cce599395e484f3", name: 'Strawberry Poptart', calories: 400, protein: 4, carbs: 76, fat: 10, sodium: 336, fiber: 0, servingSize: 2, servings: 1},
-        {_id: "54e831ee1cce599395e48507", name: '95\/5 Ground Beef', calories: 164, protein: 25, carbs: 0, fat: 6, sodium: 0, fiber: 0, servingSize: 1, servings: 1},
-        {_id: "54e831ee1cce599395e484f4", name: 'Oatmeal', calories: 150, protein: 5, carbs: 27, fat: 3, sodium: 0, fiber: 0, servingSize: 1, servings: 1},
-        {_id: "54e831ee1cce599395e4855b", name: 'Whole Grain Bread ', calories: 100, protein: 5, carbs: 20, fat: 2, sodium: 120, fiber: 0, servingSize: 1, servings: 1},
-        {_id: "54e831ee1cce599395e484f5", name: 'Banana', calories: 105, protein: 1, carbs: 27, fat: 0, sodium: 0, fiber: 0, servingSize: 1, servings: 1},
-      ];
-      meals[yesterday].totals = {
-        totalCals: 1039,
-        totalProtein: 66,
-        totalCarbs: 150,
-        totalFat: 13,
-        totalSodium: 528/24,
-        totalFiber: 0
-      };
-      meals[today] = [
-        {_id: "54e831ee1cce599395e484f3", name: 'Strawberry Poptart', calories: 400, protein: 4, carbs: 76, fat: 1, sodium: 72, fiber: 0, servingSize: 2, servings: 1, baseMacros: {calories: 400, protein: 4, carbs: 76, fat: 1, sodium: 72, fiber: 0}},
-        {_id: "54e831ee1cce599395e484fe", name: 'Chicken', calories: 120, protein: 26, carbs: 0, fat: 1.5, sodium: 72, fiber: 0, servingSize: 1, servings: 1, baseMacros: {calories: 120, protein: 26, carbs: 0, fat: 1.5, sodium: 72, fiber: 0}},
-        {_id: "54e831ee1cce599395e484f5", name: 'Banana', calories: 105, protein: 1, carbs: 27, fat: 0, sodium: 0, fiber: 0, servingSize: 1, servings: 1, baseMacros: {calories: 105, protein: 1, carbs: 27, fat: 0, sodium: 0, fiber: 0}},
-        {_id: "54e831ee1cce599395e484f4", name: 'Oatmeal', calories: 150, protein: 5, carbs: 27, fat: 3, sodium: 0, fiber: 0, servingSize: 1, servings: 1, baseMacros: {calories: 150, protein: 5, carbs: 27, fat: 3, sodium: 0, fiber: 0}},
-        {_id: "54e831ee1cce599395e48507", name: '95\/5 Ground Beef', calories: 164, protein: 25, carbs: 0, fat: 6, sodium: 0, fiber: 0, servingSize: 1, servings: 1, baseMacros: {calories: 164, protein: 25, carbs: 0, fat: 0, sodium: 0, fiber: 0}},
-        {_id: "54e831ee1cce599395e4855b", name: 'Whole Grain Bread ', calories: 100, protein: 5, carbs: 20, fat: 2, sodium: 120, fiber: 0, servingSize: 1, servings: 1, baseMacros: {calories: 100, protein: 5, carbs: 20, fat: 2, sodium: 120, fiber:0}}
-      ];
-      meals[today].totals = {
-        totalCals: 1039,
-        totalProtein: 66,
-        totalCarbs: 150,
-        totalFat: 13,
-        totalSodium: parseFloat(528/24),
-        totalFiber: 0
-      };
-      return meals;
+        return deferred.promise;
+      }
     },
     addFoodToMeal: function(date, food) {
       var meal = this.getMeal(date);
       meal.push(food);
 
-      // PUT FOOD TO SERVER
+      // PUT food to server
     },
     addNewFood: function(food) {
-      // POST food to server using $http
+      // POST food to server
 
     }
   };

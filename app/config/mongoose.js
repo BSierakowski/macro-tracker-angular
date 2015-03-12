@@ -23,7 +23,7 @@ module.exports = function(config) {
   });
 
   var mealSchema = mongoose.Schema({
-    date: Date,
+    date: String,
     foods: Array,
     totals: Object
   });

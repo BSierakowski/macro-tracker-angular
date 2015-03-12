@@ -15,10 +15,18 @@ module.exports = function(app) {
     });
   });
 
-  // get one meal by id
-  //TODO: won't want to query by id but by DATE
-  app.get('/meals/:id', function(req, res) {
-    Meal.findOne({_id: req.params.id}, function(err, meal) {
+  // get all meals
+  app.get('/meals', function(req, res) {
+    Meal.find(function(err, meals) {
+      if (err) { res.json(err); }
+
+      res.json(meals);
+    });
+  });
+
+  // get one meal by date
+  app.get('/meals/:date', function(req, res) {
+    Meal.findOne({date: req.params.date}, function(err, meal) {
       if (err) { res.json(err); }
 
       res.json(meal);

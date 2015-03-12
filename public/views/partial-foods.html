@@ -34,7 +34,7 @@
         </table>
         <div class="pre-scrollable">
           <table width="100%" class="table table-bordered">
-            <tr ng-repeat="food in currentMeal">
+            <tr ng-repeat="food in currentMeal.foods">
               <td class="text-center col-md-2 buttons-td">
                 <button class="btn btn-default servings-button" ng-click="increaseServing(food)"><span class="glyphicon glyphicon-arrow-up"></span></button>
                 <input class="servings-input" ng-model="food.servings" ng-change="updateMacros(food)"</input>
@@ -84,7 +84,7 @@
   <div class="container">
     <div class="date-picker">
       <button class="btn btn-default" ng-click="decrementDay()"><span class="glyphicon glyphicon-arrow-left hover-highlight"></span></button>
-      {{currentMealDate.toLocaleDateString("en-US")}}
+      {{currentMealDate}}
       <button class="btn btn-default" ng-click="incrementDay()"><span class="glyphicon glyphicon-arrow-right hover-highlight"></span></button>
     </div>
   </div>

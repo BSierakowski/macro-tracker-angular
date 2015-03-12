@@ -5,12 +5,13 @@ app.controller('FoodsController', ['$scope', '$filter', 'FoodService', 'MealServ
   $scope.showNewFood = false;
 
   $scope.currentMealDate = DateService.getDateNow();
-  $scope.currentMeal = getMeal($scope.currentMealDate);
+  console.log($scope.currentMealDate);
 
   init();
 
   function init() {
     getFoods();
+    getMeal($scope.currentMealDate);
     createWatch();
   }
 
@@ -31,12 +32,18 @@ app.controller('FoodsController', ['$scope', '$filter', 'FoodService', 'MealServ
       });
   }
 
-  function filterFoods(filterInput) {
-    $scope.filteredFoods = $filter('foodFilter')($scope.foods, filterInput);
+  function getMeal(date) {
+    FoodService.getMeal(date).then(
+      function(data) {
+        $scope.currentMeal = data;
+      },
+      function(error) {
+        console.log('ERROR! ' + error);
+      });
   }
 
-  function getMeal(date) {
-    return FoodService.getMeal(date);
+  function filterFoods(filterInput) {
+    $scope.filteredFoods = $filter('foodFilter')($scope.foods, filterInput);
   }
 
   $scope.addNewFood = function() {
@@ -65,14 +72,10 @@ app.controller('FoodsController', ['$scope', '$filter', 'FoodService', 'MealServ
   }
 
   $scope.increaseServing = function(food) {
-    // FIXME: cannot have duplicate keys (foods) in ng-repeat
-    // this breaks if you try and decrease serving on a duplicate food
     MealService.increaseServing($scope.currentMeal, food);
   };
 
   $scope.decreaseServing = function(food) {
-    // FIXME: cannot have duplicate keys (foods) in ng-repeat
-    // this breaks if you try and decrease serving on a duplicate food
     MealService.decreaseServing($scope.currentMeal, food);
   };
 
