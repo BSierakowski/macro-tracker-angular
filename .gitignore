@@ -2,3 +2,4 @@ bower_components/
 .DS_Store
 todo.txt
 *.swp
+node_modules/
